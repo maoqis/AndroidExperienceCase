@@ -40,6 +40,19 @@ public class RxZipErrorFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        view.findViewById(R.id.tv_sample_thread_e).setOnClickListener(v -> {
+
+            new Thread("abc"){
+                @Override
+                public void run() {
+
+                    super.run();
+                    int x = 0;
+                    System.out.println(1/x);
+                }
+            }.start();
+        });
+
         view.findViewById(R.id.tv_observable).setOnClickListener(v -> {
             Observable first = Observable.create(e -> {
                 System.out.println("first");
