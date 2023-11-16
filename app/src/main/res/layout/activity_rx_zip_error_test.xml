@@ -13,7 +13,7 @@
         android:id="@+id/tv_sample_thread_e"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="java子线程相同异常 => 第一个异常发生时，就弹窗了，信号9是系统弹窗error取消时候发出 kill app进程"
+        android:text="java子线程相同异常 => 第一个异常发生时，就弹窗了，信号9是系统弹窗error取消时候发出 kill app进程。"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -26,6 +26,17 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:text="zip 俩observable 同时发出异常 => I/Process: Sending signal. PID: 24715 SIG: 9"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_thread_uncaught"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="UncaughtExceptionHandler 自己打印日志，系统发送信号9，没系统日志"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

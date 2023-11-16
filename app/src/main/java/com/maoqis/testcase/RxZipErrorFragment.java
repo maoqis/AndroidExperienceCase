@@ -53,6 +53,20 @@ public class RxZipErrorFragment extends Fragment {
             }.start();
         });
 
+        view.findViewById(R.id.tv_thread_uncaught).setOnClickListener(v -> {
+
+            new Thread("tv_thread_uncaught"){
+                @Override
+                public void run() {
+
+                    super.run();
+                    Log.d(TAG, "run: 这信号9：系统没日志");
+                    UncaughtExceptionHandler uncaughtExceptionHandler = Thread.currentThread().getUncaughtExceptionHandler();
+                    uncaughtExceptionHandler.uncaughtException(this,new Exception("tv_thread_uncaught"));
+                }
+            }.start();
+        });
+
         view.findViewById(R.id.tv_observable).setOnClickListener(v -> {
             Observable first = Observable.create(e -> {
                 System.out.println("first");
