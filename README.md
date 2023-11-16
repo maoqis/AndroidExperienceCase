@@ -5,8 +5,7 @@
 ## 系统杀进程 in RxZipErrorFragment
 
 ### 子线程异常FATAL EXCEPTION，app进程发出信号9(有时候没日志)，后续系统杀进程
-
-`
+```
 2023-11-16 10:55:50.363 23207-23239 AndroidRuntime          com.maoqis.testcase                  E  FATAL EXCEPTION: abc
 Process: com.maoqis.testcase, PID: 23207
 java.lang.ArithmeticException: divide by zero
@@ -14,7 +13,8 @@ at com.maoqis.testcase.RxZipErrorFragment$1.run(RxZipErrorFragment.java:49)
 2023-11-16 10:55:50.372 23207-23239 OOMEventManagerFK       com.maoqis.testcase                  D  checkEventAndDumpForJE: 0
 2023-11-16 10:55:53.153 23207-23230 maoqis.testcas          com.maoqis.testcase                  I  ProcessProfilingInfo new_methods=0 is saved saved_to_disk=0 resolve_classes_delay=8000
 2023-11-16 10:55:53.217 23207-23239 Process                 com.maoqis.testcase                  I  Sending signal. PID: 23207 SIG: 9
-`
+```
+
 
 ### rxjava zip，同时有2个异常，虽然没有E级别异常堆栈，但app进程有发出信号9。
 
