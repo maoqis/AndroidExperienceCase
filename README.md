@@ -18,7 +18,7 @@ at com.maoqis.testcase.RxZipErrorFragment$1.run(RxZipErrorFragment.java:49)
 
 ### rxjava zip，同时有2个异常，虽然没有E级别异常堆栈，但app进程有发出信号9。
 
-`
+```
 2023-11-16 11:03:24.949 23506-23545 System.out              com.maoqis.testcase                  I  first
 2023-11-16 11:03:24.950 23506-23546 System.out              com.maoqis.testcase                  I  second
 2023-11-16 11:03:24.951 23506-23545 RxZipErrorFragment      com.maoqis.testcase                  W  Observable zip: try catch 1
@@ -44,4 +44,4 @@ at com.maoqis.testcase.RxZipErrorFragment$1.run(RxZipErrorFragment.java:49)
 2023-11-16 11:03:25.191 23506-23546 Process                 com.maoqis.testcase                  I  Sending signal. PID: 23506 SIG: 9
 ---------------------------- PROCESS ENDED (23506) for package com.maoqis.testcase ----------------------------
 2023-11-16 11:03:25.233  1100-1100  Zygote                  pid-1100                             I  Process 23506 exited due to signal (9)
-`
+```
