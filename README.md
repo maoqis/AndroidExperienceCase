@@ -17,8 +17,18 @@
 15:12:54.685  I  Process 4622 exited due to signal (9)
 ```
 
+### UncaughtExceptionHandler.uncaughtException
+
+系统发出信号9，但没日志。需要自己提前打印日志。这样说闪退不一定需要W级别日志。这个地方都没打印日志。闪退需要发信号告诉系统
+
+```
+16:33:26.749  D  run: 这UncaughtExceptionHandler.uncaughtExceptio：系统没日志
+16:33:26.907  I  Sending signal. PID: 8909 SIG: 9
+```
 
 ### rxjava zip，同时有2个异常，虽然没有E级别异常堆栈，但app进程有发出信号9。
+
+Tip： zip中每一项都需要单独处理 异常。
 
 ```
 15:13:49.105  I  first
