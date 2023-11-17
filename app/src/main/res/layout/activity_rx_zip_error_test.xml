@@ -20,6 +20,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_thread_uncaught"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="UncaughtExceptionHandler 自己打印日志，系统发送信号9，没系统日志"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_observable"
@@ -33,15 +43,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_thread_uncaught"
+        android:id="@+id/tv_observable_try_catch"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="UncaughtExceptionHandler 自己打印日志，系统发送信号9，没系统日志"
+        android:text="zip 俩observable 单独处理异常"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_observable_error_handler"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="RxJavaPlugins.setErrorHandler（正解）才能try cache UncaughtExceptionHandler, 因为dispose后不能发射数据"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/tv_observable_one_exception"

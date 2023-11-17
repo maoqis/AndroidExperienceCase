@@ -19,7 +19,7 @@ import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RxZipErrorFragment extends Fragment {
@@ -92,6 +92,35 @@ public class RxZipErrorFragment extends Fragment {
                     });
         });
 
+        view.findViewById(R.id.tv_observable_try_catch).setOnClickListener(v -> {
+            Disposable[] disposables = new Disposable[1];
+            Observable first = Observable.create(e -> {
+                System.out.println("first");
+                throw new Exception("first exception");
+            }).subscribeOn(Schedulers.io()).onErrorReturnItem(-1);;
+
+            Observable second = Observable.create(e -> {
+                System.out.println("second");
+                if (disposables[0].isDisposed()) {
+                    Log.w(TAG, "onViewCreated: disposables[0].isDisposed()");
+                }
+                throw new Exception("second exception");
+            }).subscribeOn(Schedulers.io()).onErrorReturnItem(-1);
+
+
+            List<Observable<?>> observableList = new ArrayList<>();
+            observableList.add(first);
+            observableList.add(second);
+
+            disposables[0] = Observable.zip(observableList, objects -> "result")
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(t -> {
+                        System.out.println("result");
+                    }, e -> {
+                        Log.w(TAG, "Observable zip: try catch 1");
+                    });
+        });
+
         view.findViewById(R.id.tv_observable_one_exception).setOnClickListener(v -> {
             Observable first = Observable.create(e -> {
                 System.out.println("first");
@@ -101,6 +130,34 @@ public class RxZipErrorFragment extends Fragment {
             Observable second = Observable.create(e -> {
                 System.out.println("second");
 //                throw new Exception("second exception");
+            }).subscribeOn(Schedulers.io());
+
+
+            List<Observable<?>> observableList = new ArrayList<>();
+            observableList.add(first);
+            observableList.add(second);
+
+            Observable.zip(observableList, objects -> "result")
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(t -> {
+                        System.out.println("result");
+                    }, e -> {
+                        Log.w(TAG, "Observable zip: try catch 1");
+                    });
+        });
+
+        view.findViewById(R.id.tv_observable_error_handler).setOnClickListener( v -> {
+            RxJavaPlugins.setErrorHandler(e -> {
+                Log.w(TAG, "RxJavaPlugins.setErrorHandler callback: ", e);
+            });
+            Observable first = Observable.create(e -> {
+                System.out.println("first");
+                throw new Exception("first exception");
+            }).subscribeOn(Schedulers.io());
+
+            Observable second = Observable.create(e -> {
+                System.out.println("second");
+                throw new Exception("second exception");
             }).subscribeOn(Schedulers.io());
 
 
