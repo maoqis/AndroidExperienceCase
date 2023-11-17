@@ -61,3 +61,40 @@ Tip： zip中每一项都需要单独处理 异常。
 ---------------------------- PROCESS ENDED (4773) for package com.maoqis.testcase ----------------------------
 15:13:57.965  I  Process 4773 exited due to signal (9)
 ```
+
+### RxJavaPlugins.setErrorHandler 才能捕获库内部异常，subscribe中无法捕获的异常。
+```
+14:51:22.333  I  first
+14:51:22.333  W  Observable zip: try catch 1
+14:51:22.334  I  second
+14:51:22.336  W  RxJavaPlugins.setErrorHandler callback: 
+                 io.reactivex.rxjava3.exceptions.UndeliverableException: The exception could not be delivered to the consumer because it has already canceled/disposed the flow or the exception has nowhere to go to begin with. Further reading: https://github.com/ReactiveX/RxJava/wiki/What's-different-in-2.0#error-handling | java.lang.Exception: second exception
+                 	at io.reactivex.rxjava3.plugins.RxJavaPlugins.onError(RxJavaPlugins.java:367)
+                 	at io.reactivex.rxjava3.internal.operators.observable.ObservableCreate$CreateEmitter.onError(ObservableCreate.java:73)
+                 	at io.reactivex.rxjava3.internal.operators.observable.ObservableCreate.subscribeActual(ObservableCreate.java:43)
+                 	at io.reactivex.rxjava3.core.Observable.subscribe(Observable.java:13102)
+                 	at io.reactivex.rxjava3.internal.operators.observable.ObservableSubscribeOn$SubscribeTask.run(ObservableSubscribeOn.java:96)
+                 	at io.reactivex.rxjava3.core.Scheduler$DisposeTask.run(Scheduler.java:614)
+                 	at io.reactivex.rxjava3.internal.schedulers.ScheduledRunnable.run(ScheduledRunnable.java:65)
+                 	at io.reactivex.rxjava3.internal.schedulers.ScheduledRunnable.call(ScheduledRunnable.java:56)
+                 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+                 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:301)
+                 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+                 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+                 	at java.lang.Thread.run(Thread.java:764)
+                 Caused by: java.lang.Exception: second exception
+                 	at com.maoqis.testcase.RxZipErrorFragment.lambda$null$22(RxZipErrorFragment.java:161)
+                 	at com.maoqis.testcase.-$$Lambda$RxZipErrorFragment$27RZ5dbhKZ2Mx85W5oZRzvVRTCo.subscribe(Unknown Source:0)
+                 	at io.reactivex.rxjava3.internal.operators.observable.ObservableCreate.subscribeActual(ObservableCreate.java:40)
+                 	at io.reactivex.rxjava3.core.Observable.subscribe(Observable.java:13102) 
+                 	at io.reactivex.rxjava3.internal.operators.observable.ObservableSubscribeOn$SubscribeTask.run(ObservableSubscribeOn.java:96) 
+                 	at io.reactivex.rxjava3.core.Scheduler$DisposeTask.run(Scheduler.java:614) 
+                 	at io.reactivex.rxjava3.internal.schedulers.ScheduledRunnable.run(ScheduledRunnable.java:65) 
+                 	at io.reactivex.rxjava3.internal.schedulers.ScheduledRunnable.call(ScheduledRunnable.java:56) 
+                 	at java.util.concurrent.FutureTask.run(FutureTask.java:266) 
+                 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:301) 
+                 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167) 
+                 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641) 
+                 	at java.lang.Thread.run(Thread.java:764)
+
+```
