@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_must_result"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="A带返回值启动B，从桌面最近最近应用回到A是否收到onActivityResult"
+        android:gravity="center" />
+</LinearLayout>

@@ -10,6 +10,17 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tv_on_error_again"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="onErrorReturn 时候不能再抛出异常，处理异常时候不能再抛出。生产新的异常，提示有俩个异常发生。使用发射器发射异常ok。\n 问： 此时观察者能收到 一个Error，执行错误后续处理吗？"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/tv_sample_thread_e"
         android:layout_width="match_parent"
         android:layout_height="48dp"

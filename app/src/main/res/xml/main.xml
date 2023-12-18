@@ -5,6 +5,8 @@
     <header
         android:fragment="com.maoqis.testcase.RxZipErrorFragment"
         android:title="RxZipErrorFragment ->" />
-
+    <header
+        android:fragment="com.maoqis.testcase.StartActivityFragment"
+        android:title="StartActivityFragment ->" />
 
 </preference-headers>
