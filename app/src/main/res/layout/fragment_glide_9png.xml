@@ -55,7 +55,7 @@
     </ImageView>
 
     <com.maoqis.testcase.view.CommonClickView
-        android:text="思考：9.png还是需要放到对应密度的目录进行编译，这样圆角可以根据不同密度进行放缩。另外的问题是，图标预览不太方便，可能需要专门的工具。最后webp的体积已经可以替代9.png了。\n但是如果有些地方需要动态下发圆角，图标中文字不拉伸失真，也是一种灵活方案。不需要发版，而且灵活性好"
+        android:text="思考：9.png还是需要放到对应密度的目录进行编译，这样圆角可以根据不同密度进行放缩。另外的问题是，图标预览不太方便，可能需要专门的工具。最后webp的体积已经可以替代9.png了。\n但是如果有些地方需要动态下发圆角，图标中文字不拉伸失真，也是一种灵活方案。不需要发版，而且灵活性好。\n开屏是否可以有四周有内容不拉伸的全屏需求？"
         android:textColor="@color/purple_500"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
