@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.TransitionOptions;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.maoqis.testcase.component.BaseCaseFragment;
@@ -42,6 +44,7 @@ public class Glide9pngFragment extends BaseCaseFragment {
         //直接显示原9.png 有黑边，缺少Bitmap中的9.png 的chunk信息。
 
         String url = "https://raw.githubusercontent.com/vindolin/ninepatch/master/src/ninepatch/data/ninepatch_bubble.9.png";
+        String urlChunk = "https://raw.githubusercontent.com/maoqis/AndroidExperienceCase/master/app/src/main/assets/ninepatch_bubble_chunk.9.png";
         Glide.with(this).asBitmap()
                 .dontTransform()//
                 .load(url).into(new CustomTarget<Bitmap>() {
@@ -81,8 +84,12 @@ public class Glide9pngFragment extends BaseCaseFragment {
 
         });
         findSetOnClickListener(R.id.tv_glide_appt, v -> {
-            String urlChunk = "https://raw.githubusercontent.com/maoqis/AndroidExperienceCase/master/app/src/main/assets/ninepatch_bubble_chunk.9.png";
-            Glide.with(this).load(url).into(ivAPPT);
+            Glide.with(this)
+                    .asBitmap()
+//                    .asDrawable()
+                    .dontTransform()//transform 时候是否可以把 bitmap 变成 NinePatchDrawable? 或者使用自定义ImageViewTargetFactory.
+                    .load(urlChunk)
+                    .into(ivAPPT);
         });
 
     }

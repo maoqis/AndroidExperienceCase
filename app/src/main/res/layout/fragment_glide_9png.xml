@@ -12,7 +12,7 @@
         android:text="加载res文件中9.png，打包时候已经经过aapt编译：通过是否有边线，来判断是否是9.png。" />
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="360dp"
         android:layout_height="48dp"
         android:src="@drawable/ninepatch_bubble"></ImageView>
 
@@ -25,7 +25,7 @@
 
     <ImageView
         android:id="@+id/iv_h48"
-        android:layout_width="wrap_content"
+        android:layout_width="360dp"
         android:layout_height="48dp">
 
     </ImageView>
@@ -50,14 +50,16 @@
 
     <ImageView
         android:id="@+id/iv_appt"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"></ImageView>
+        android:scaleType="fitXY"
+        android:layout_width="360dp"
+        android:layout_height="48dp">
+    </ImageView>
 
     <com.maoqis.testcase.view.CommonClickView
         android:id="@+id/tv_glide_appt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="glide直接加载appt后的9.png到Image上是不支持的，还得用asBitmap into到 CustomTarget 。后续应该考虑下类似于Glide webp解码的方案，增强代码通用性。点击->">
+        android:text="glide不支持直接加载appt后的9.png。简单方案，用asBitmap into到 CustomTarget ，点击-> 。调研了下后续通用性方案：transform 时候是否可以把 bitmap 变成 NinePatchDrawable? 或者使用自定义ImageViewTargetFactory，配置自定义ImageViewTarget。">
 
     </com.maoqis.testcase.view.CommonClickView>
 
