@@ -9,4 +9,7 @@
         android:fragment="com.maoqis.testcase.StartActivityFragment"
         android:title="StartActivityFragment ->" />
 
+    <header
+        android:fragment="com.maoqis.testcase.Glide9pngFragment"
+        android:title="Glide9pngFragment ->" />
 </preference-headers>
