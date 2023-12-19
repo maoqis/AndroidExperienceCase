@@ -9,19 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:text="原图：是否是9.png ,是否有边线" />
+        android:text="加载res文件中9.png，打包时候已经经过aapt编译：通过是否有边线，来判断是否是9.png。" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:src="@drawable/ninepatch_bubble">
-    </ImageView>
+        android:src="@drawable/ninepatch_bubble"></ImageView>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:text="原ninepatch_bubble.9.png：未使用appt命令编译前的图片" />
+        android:text="直接加载，原ninepatch_bubble.9.png，未使用appt命令编译前的图片" />
 
 
     <ImageView
@@ -33,34 +32,40 @@
 
     <com.maoqis.testcase.view.CommonClickView
         android:id="@+id/tv_not_appt"
-        android:text="使用assets目录读取原文件ninepatch_bubble.9.png流和读文件是一样的。发现：判断不了是否是9.png，点击->"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:text="发现原因：判断不了是否是9.png，使用assets目录读取原文件ninepatch_bubble.9.png流和读文件是一样的。点击->">
 
     </com.maoqis.testcase.view.CommonClickView>
 
     <com.maoqis.testcase.view.CommonClickView
         android:id="@+id/tv_appt"
-        android:text="成功: is9png。原因：打包时候，应该是有操作，将原9.png，编译为带chunk的png图片ninepatch_bubble_chunk.9.png（预览看起来跟正常图片无异）；`aapt s -i [文件名] -o [文件名]` 点击对比->"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:text="成功: is9png。方案：编译为带chunk的png图片ninepatch_bubble_chunk.9.png（预览看起来跟正常图片无异）；`aapt s -i [文件名] -o [文件名]` 点击对比->"
+        android:textColor="@color/purple_500">
 
     </com.maoqis.testcase.view.CommonClickView>
+
 
     <ImageView
         android:id="@+id/iv_appt"
         android:layout_width="match_parent"
-        android:layout_height="48dp">
-
-    </ImageView>
+        android:layout_height="48dp"></ImageView>
 
     <com.maoqis.testcase.view.CommonClickView
-        android:text="思考：9.png还是需要放到对应密度的目录进行编译，这样圆角可以根据不同密度进行放缩。另外的问题是，图标预览不太方便，可能需要专门的工具。最后webp的体积已经可以替代9.png了。\n但是如果有些地方需要动态下发圆角，图标中文字不拉伸失真，也是一种灵活方案。不需要发版，而且灵活性好。\n开屏是否可以有四周有内容不拉伸的全屏需求？"
-        android:textColor="@color/purple_500"
+        android:id="@+id/tv_glide_appt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:text="glide直接加载appt后的9.png到Image上是不支持的，还得用asBitmap into到 CustomTarget 。后续应该考虑下类似于Glide webp解码的方案，增强代码通用性。点击->">
 
     </com.maoqis.testcase.view.CommonClickView>
+
+    <com.maoqis.testcase.view.CommonClickView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="思考：9.png还是需要放到对应密度的目录进行编译，这样圆角可以根据不同密度进行放缩。另外的问题是，图标预览不太方便，可能需要专门的工具。最后webp的体积已经可以替代9.png了。\n但是如果有些地方需要动态下发圆角，图标中文字不拉伸失真，也是一种灵活方案。不需要发版，而且灵活性好。\n开屏是否可以有四周有内容不拉伸的全屏需求？"
+        android:textColor="@color/purple_500"></com.maoqis.testcase.view.CommonClickView>
 
 
 </LinearLayout>

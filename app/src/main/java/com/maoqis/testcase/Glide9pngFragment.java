@@ -80,7 +80,10 @@ public class Glide9pngFragment extends BaseCaseFragment {
             ivAPPT.setImageDrawable(pngBitmapDrawable);
 
         });
-
+        findSetOnClickListener(R.id.tv_glide_appt, v -> {
+            String urlChunk = "https://raw.githubusercontent.com/maoqis/AndroidExperienceCase/master/app/src/main/assets/ninepatch_bubble_chunk.9.png";
+            Glide.with(this).load(url).into(ivAPPT);
+        });
 
     }
 
