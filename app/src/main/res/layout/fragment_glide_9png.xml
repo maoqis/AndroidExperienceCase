@@ -56,18 +56,35 @@
     </ImageView>
 
     <com.maoqis.testcase.view.CommonClickView
-        android:id="@+id/tv_glide_appt"
+        android:id="@+id/tv_glide_appt_only_download"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="glide不支持直接加载appt后的9.png。简单方案，用asBitmap into到 CustomTarget ，点击-> 。调研了下后续通用性方案：transform 时候是否可以把 bitmap 变成 NinePatchDrawable? 或者使用自定义ImageViewTargetFactory，配置自定义ImageViewTarget。">
+        android:text="glide onlyDownload ok。点击-> 。"/>
+
+    <com.maoqis.testcase.view.CommonClickView
+        android:id="@+id/tv_glide_appt"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="glide不支持直接加载appt后的9.png,Downsampler采用压缩导致，读取9.png 失去信息。点击-> 。">
 
     </com.maoqis.testcase.view.CommonClickView>
+
+    <com.maoqis.testcase.view.CommonClickView
+        android:id="@+id/tv_glide_custom_9png"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="要先prepend InputStreamBitmapImageDecoderResourceDecoder解码器，兼容下GlideWebpDecoder的解码器库。这块如何判断是9.png，又不影响非9.png的效率？之后Glide使用自定义ImageViewTargetFactory，使Bitmap源支持chunk后的9.png, 点击设置->。 再次点击上方按钮试下">
+
+    </com.maoqis.testcase.view.CommonClickView>
+
 
     <com.maoqis.testcase.view.CommonClickView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="思考：9.png还是需要放到对应密度的目录进行编译，这样圆角可以根据不同密度进行放缩。另外的问题是，图标预览不太方便，可能需要专门的工具。最后webp的体积已经可以替代9.png了。\n但是如果有些地方需要动态下发圆角，图标中文字不拉伸失真，也是一种灵活方案。不需要发版，而且灵活性好。\n开屏是否可以有四周有内容不拉伸的全屏需求？"
-        android:textColor="@color/purple_500"></com.maoqis.testcase.view.CommonClickView>
+        android:textColor="@color/purple_500">
+    </com.maoqis.testcase.view.CommonClickView>
 
 
 </LinearLayout>
