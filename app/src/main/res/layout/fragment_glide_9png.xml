@@ -9,18 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:text="加载res文件中9.png，打包时候已经经过aapt编译：通过是否有边线，来判断是否是9.png。" />
+        android:text="1. 加载res文件中9.png，打包时候已经经过aapt编译：通过是否有边线，来判断是否是9.png。" />
 
     <ImageView
         android:layout_width="360dp"
         android:layout_height="48dp"
         android:src="@drawable/ninepatch_bubble"></ImageView>
 
-    <TextView
+    <com.maoqis.testcase.view.CommonClickView
+        android:id="@+id/tv_source_not_appt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:text="直接加载，原ninepatch_bubble.9.png，未使用appt命令编译前的图片" />
+        android:text="2. 直接加载，原ninepatch_bubble.9.png，未使用appt命令编译前的图片 ->" />
 
 
     <ImageView
@@ -34,7 +35,7 @@
         android:id="@+id/tv_not_appt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="发现原因：判断不了是否是9.png，使用assets目录读取原文件ninepatch_bubble.9.png流和读文件是一样的。点击->">
+        android:text="3. 发现原因：判断不了是否是9.png，使用assets目录读取原文件ninepatch_bubble.9.png流和读文件是一样的。点击->">
 
     </com.maoqis.testcase.view.CommonClickView>
 
@@ -42,7 +43,7 @@
         android:id="@+id/tv_appt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="成功: is9png。方案：编译为带chunk的png图片ninepatch_bubble_chunk.9.png（预览看起来跟正常图片无异）；`aapt s -i [文件名] -o [文件名]` 点击对比->"
+        android:text="4. 成功: is9png。方案：编译为带chunk的png图片ninepatch_bubble_chunk.9.png（预览看起来跟正常图片无异）；`aapt s -i [文件名] -o [文件名]` 点击对比->"
         android:textColor="@color/purple_500">
 
     </com.maoqis.testcase.view.CommonClickView>
@@ -59,14 +60,14 @@
         android:id="@+id/tv_glide_appt_only_download"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="glide onlyDownload ok。点击-> 。"/>
+        android:text="5. glide onlyDownload ok。点击-> 。"/>
 
     <com.maoqis.testcase.view.CommonClickView
         android:id="@+id/tv_glide_appt"
         android:textColor="@android:color/holo_red_dark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="glide不支持直接加载appt后的9.png,Downsampler采用压缩导致，读取9.png 失去信息。点击-> 。">
+        android:text="6. glide不支持直接加载appt后的9.png。 主要因为Downsampler解码时候，丢失了9.png信息。要自定义Glide 9png的解码器，handlers方法返回是否是9.png。点击-> 。">
 
     </com.maoqis.testcase.view.CommonClickView>
 
@@ -74,10 +75,15 @@
         android:id="@+id/tv_glide_custom_9png"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="要先prepend InputStreamBitmapImageDecoderResourceDecoder解码器，兼容下GlideWebpDecoder的解码器库。这块如何判断是9.png，又不影响非9.png的效率？之后Glide使用自定义ImageViewTargetFactory，使Bitmap源支持chunk后的9.png, 点击设置->。 再次点击上方按钮试下">
-
+        android:text="7. 之后Glide使用自定义ImageViewTargetFactory，适配into.(ImageView) 点击设置->。 再次点击上方按钮试下">
     </com.maoqis.testcase.view.CommonClickView>
 
+    <com.maoqis.testcase.view.CommonClickView
+        android:id="@+id/tv_glide_9png_cache"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="8. 最后是使用缓存策略，使网络加载时候，存的文件缓存不压缩。可能要修改加码器">
+    </com.maoqis.testcase.view.CommonClickView>
 
     <com.maoqis.testcase.view.CommonClickView
         android:layout_width="match_parent"

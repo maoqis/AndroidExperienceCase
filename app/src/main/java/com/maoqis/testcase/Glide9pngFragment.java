@@ -2,7 +2,6 @@ package com.maoqis.testcase;
 
 import static android.os.Environment.DIRECTORY_PICTURES;
 
-import static com.bumptech.glide.load.engine.DiskCacheStrategy.DATA;
 import static com.bumptech.glide.load.engine.DiskCacheStrategy.NONE;
 
 import android.annotation.SuppressLint;
@@ -21,11 +20,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Registry;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.EncodeStrategy;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.maoqis.testcase.component.BaseCaseFragment;
-import com.maoqis.testcase.glide.NinePngUtils;
+import com.maoqis.testcase.glide.utils.NinePngUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,33 +44,45 @@ public class Glide9pngFragment extends BaseCaseFragment {
     @SuppressLint("CheckResult")
     @Override
     protected void onInitView(ViewGroup rootView) {
-
         ImageView ivH48 = rootView.findViewById(R.id.iv_h48);
         ImageView ivAPPT = rootView.findViewById(R.id.iv_appt);
 
         //直接显示原9.png 有黑边，缺少Bitmap中的9.png 的chunk信息。
-
-        String url = "https://raw.githubusercontent.com/vindolin/ninepatch/master/src/ninepatch/data/ninepatch_bubble.9.png";
+        String url = "https://i.postimg.cc/cZTH0ZJR/ninepatch-bubble-9.png?dl=1";
+//        String url = "https://raw.githubusercontent.com/vindolin/ninepatch/master/src/ninepatch/data/ninepatch_bubble.9.png";
         String urlChunk = "https://raw.githubusercontent.com/maoqis/AndroidExperienceCase/master/app/src/main/assets/ninepatch_bubble_chunk.9.png";
-        GlideApp.with(this).asBitmap()
-                .dontTransform()//
-                .load(url).into(new CustomTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap bitmap, @Nullable Transition<? super Bitmap> transition) {
-                        Drawable drawable = get9pngBitmapDrawable(bitmap);
-                        ivH48.setImageDrawable(drawable);
-                    }
+        File fileChuck = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES), "ninepatch_bubble_chunk.9.png");
 
-                    @Override
-                    public void onLoadCleared(@Nullable Drawable placeholder) {
-                        Log.d(TAG, "onLoadCleared() called with: placeholder = [" + placeholder + "]");
-                    }
+        //source not appt
+        findSetOnClickListener(R.id.tv_source_not_appt, v -> {
 
-                    @Override
-                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
-                        super.onLoadFailed(errorDrawable);
-                    }
-                });
+            String fileName = "ninepatch_bubble.9.png";
+            try {
+                GlideApp.with(this).asBitmap()
+                        .dontTransform()//
+                        .load(url)
+//                        .load(getContext().getAssets().open(fileName))
+                        .into(new CustomTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(@NonNull Bitmap bitmap, @Nullable Transition<? super Bitmap> transition) {
+                                Drawable drawable = get9pngBitmapDrawable(bitmap);
+                                ivH48.setImageDrawable(drawable);
+                            }
+
+                            @Override
+                            public void onLoadCleared(@Nullable Drawable placeholder) {
+                                Log.d(TAG, "onLoadCleared() called with: placeholder = [" + placeholder + "]");
+                            }
+
+                            @Override
+                            public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                                super.onLoadFailed(errorDrawable);
+                            }
+                        });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
         //原因
         findSetOnClickListener(R.id.tv_not_appt, v -> {
@@ -132,7 +146,7 @@ public class Glide9pngFragment extends BaseCaseFragment {
                     .asBitmap()
                     .dontAnimate()
                     .diskCacheStrategy(NONE)
-                    .load(new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES), "ninepatch_bubble_chunk.9.png"))
+                    .load(fileChuck)
 //                    .load(urlChunk)
                     .into(new CustomTarget<Bitmap>() {
                         @Override
@@ -151,14 +165,6 @@ public class Glide9pngFragment extends BaseCaseFragment {
                             super.onLoadFailed(errorDrawable);
                         }
                     });
-
-//            no
-//            Glide.with(this)
-//                    .asBitmap()
-////                    .asDrawable()
-//                    .dontTransform()//transform 时候是否可以把 bitmap 变成 NinePatchDrawable? 或者使用自定义ImageViewTargetFactory.
-//                    .load(urlChunk)
-//                    .into(ivAPPT);
         });
         findSetOnClickListener(R.id.tv_glide_custom_9png, v -> {
 
@@ -167,9 +173,59 @@ public class Glide9pngFragment extends BaseCaseFragment {
                     .asBitmap()
                     .diskCacheStrategy(NONE)
                     .dontTransform()//默认的变化要去掉。
-                    .load(urlChunk)
-                    .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                    .load(fileChuck)
                     .into(ivAPPT);
+        });
+        findSetOnClickListener(R.id.tv_glide_9png_cache, v -> {
+            Log.d(TAG, "onInitView: ");
+            DiskCacheStrategy strategy = new DiskCacheStrategy() {
+                @Override
+                public boolean isDataCacheable(DataSource dataSource) {
+                    return false;
+                }
+
+                @Override
+                public boolean isResourceCacheable(
+                        boolean isFromAlternateCacheKey, DataSource dataSource, EncodeStrategy encodeStrategy) {
+                    return dataSource != DataSource.RESOURCE_DISK_CACHE
+                            && dataSource != DataSource.DATA_DISK_CACHE;
+                }
+
+                @Override
+                public boolean decodeCachedResource() {
+                    return false;
+                }
+
+                @Override
+                public boolean decodeCachedData() {
+                    return false;
+                }
+            };
+            strategy = NONE;
+            GlideApp.with(getActivity())
+                    .asBitmap()
+                    .dontAnimate()
+                    .diskCacheStrategy(strategy)
+//                    .load()
+                    .load(urlChunk)
+                    .into(new CustomTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap bitmap, @Nullable Transition<? super Bitmap> transition) {
+                            Drawable drawable = get9pngBitmapDrawable(bitmap);
+                            ivAPPT.setImageDrawable(drawable);
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable placeholder) {
+                            Log.d(TAG, "onLoadCleared() called with: placeholder = [" + placeholder + "]");
+                        }
+
+                        @Override
+                        public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                            super.onLoadFailed(errorDrawable);
+                        }
+                    });
+
         });
 
     }

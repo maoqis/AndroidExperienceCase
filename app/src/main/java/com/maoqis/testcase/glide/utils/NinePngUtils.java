@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide;
+package com.maoqis.testcase.glide.utils;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -10,6 +10,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.load.ImageHeaderParser;
+import com.bumptech.glide.load.ImageHeaderParserUtils;
+import com.bumptech.glide.load.engine.bitmap_recycle.ArrayPool;
 import com.maoqis.testcase.glide.io.ByteBufferReader;
 import com.maoqis.testcase.glide.io.IntReader;
 
@@ -19,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
 
 public class NinePngUtils {
     private static final String TAG = "NinePngUtils";
@@ -56,7 +60,27 @@ public class NinePngUtils {
         return false;
     }
 
-    public static boolean is9png(InputStream source) {
+    public static boolean isIs9png(@NonNull InputStream source, ArrayPool arrayPool) throws IOException {
+        NineImageHeaderParser nineImageHeaderParserWrap = new NineImageHeaderParser();
+        ArrayList<ImageHeaderParser> parsers = new ArrayList<>();
+        parsers.add(nineImageHeaderParserWrap);
+        ImageHeaderParserUtils.getType(parsers, source, arrayPool);
+
+        boolean is9png = nineImageHeaderParserWrap.is9png;
+        return is9png;
+    }
+
+    public static boolean is9png(@NonNull ByteBuffer source) throws IOException {
+        NineImageHeaderParser nineImageHeaderParserWrap = new NineImageHeaderParser();
+        ArrayList<ImageHeaderParser> parsers = new ArrayList<>();
+        parsers.add(nineImageHeaderParserWrap);
+        ImageHeaderParserUtils.getType(parsers, source);
+
+        boolean is9png = nineImageHeaderParserWrap.is9png;
+        return is9png;
+    }
+
+    static boolean is9pngInner(InputStream source) {
         try {
             byte[] bytes = loadNinePatchChunk(source);
             return is9png(bytes);
@@ -67,7 +91,7 @@ public class NinePngUtils {
         return false;
     }
 
-    public static boolean is9png(ByteBuffer source) {
+    static boolean is9pngInner(ByteBuffer source) {
         try {
             byte[] bytes = loadNinePatchChunk(source);
             return is9png(bytes);
@@ -108,8 +132,12 @@ public class NinePngUtils {
         if (reader.readInt() != 0x89504e47 || reader.readInt() != 0x0D0A1A0A) {
             return null;
         }
-
+        int max32Num = 300;
         while (true) {
+            if (max32Num <= 0) {
+                return null;
+            }
+            max32Num--;
             int length = reader.readInt();
             int type = reader.readInt();
             // check for nine patch chunk type (npTc)
@@ -134,8 +162,12 @@ public class NinePngUtils {
         if (reader.getUInt32() != 0x89504e47 || reader.getUInt32() != 0x0D0A1A0A) {
             return null;
         }
-
+        int max32Num = 300;
         while (true) {
+            if (max32Num <= 0) {
+                return null;
+            }
+            max32Num--;
             int length = reader.getUInt32();
             int type = reader.getUInt32();
             // check for nine patch chunk type (npTc)

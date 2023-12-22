@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.maoqis.testcase.glide.utils.NinePngUtils;
 
 public class NineBitmapImageViewTarget extends BitmapImageViewTarget {
     private static final String TAG = "NineBitmapImageViewTarg";

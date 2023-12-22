@@ -3,6 +3,7 @@ package com.maoqis.testcase.glide;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,10 +15,12 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.engine.bitmap_recycle.ArrayPool;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import com.bumptech.glide.load.resource.bitmap.BitmapEncoder;
 import com.bumptech.glide.module.LibraryGlideModule;
 import com.bumptech.glide.request.target.ImageViewTargetFactory;
 import com.maoqis.testcase.glide.decoder.ByteBufferBitmap9pngDecoder;
 import com.maoqis.testcase.glide.decoder.StreamBitmap9pngDecoder;
+import com.maoqis.testcase.glide.encode.NineBitmapEncoder;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -37,14 +40,14 @@ public class NinePatchGlideModule extends LibraryGlideModule {
         final BitmapPool bitmapPool = glide.getBitmapPool();
         final ArrayPool arrayPool = glide.getArrayPool();
         ByteBufferBitmap9pngDecoder byteBufferBitmapDecoder = new ByteBufferBitmap9pngDecoder(bitmapPool);
-        StreamBitmap9pngDecoder streamBitmapDecoder = new StreamBitmap9pngDecoder(bitmapPool);
+        StreamBitmap9pngDecoder streamBitmapDecoder = new StreamBitmap9pngDecoder(bitmapPool, arrayPool);
         registry
-                /* Bitmaps for static webp images */
                 .prepend(Registry.BUCKET_BITMAP, ByteBuffer.class, Bitmap.class, byteBufferBitmapDecoder)
                 .prepend(Registry.BUCKET_BITMAP, InputStream.class, Bitmap.class, streamBitmapDecoder)
         ;
-
-
+//        缓存时候用到
+        BitmapEncoder bitmapEncoder = new NineBitmapEncoder(arrayPool);
+        registry.prepend(Bitmap.class, bitmapEncoder);
         //反射设置，NinePatchImageViewTargetFactory ，适配ImageView
         try {
             Field field = glide.getClass().getDeclaredField("glideContext");

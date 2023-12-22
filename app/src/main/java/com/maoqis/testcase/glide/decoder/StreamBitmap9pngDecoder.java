@@ -9,9 +9,11 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.ResourceDecoder;
 import com.bumptech.glide.load.engine.Resource;
+import com.bumptech.glide.load.engine.bitmap_recycle.ArrayPool;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
-import com.maoqis.testcase.glide.NinePngUtils;
+import com.maoqis.testcase.glide.Constants;
+import com.maoqis.testcase.glide.utils.NinePngUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,19 +25,23 @@ import java.io.InputStream;
  * @author liuchun
  */
 public class StreamBitmap9pngDecoder implements ResourceDecoder<InputStream, Bitmap> {
-    private static final String TAG = "StreamBitmapWebpDecoder";
+    private static final String TAG = "StreamBitmap9pngDecoder";
     private final BitmapPool bitmapPool;
+    private final ArrayPool arrayPool;
 
 
-    public StreamBitmap9pngDecoder(BitmapPool bitmapPool) {
+    public StreamBitmap9pngDecoder(BitmapPool bitmapPool, ArrayPool arrayPool) {
         this.bitmapPool = bitmapPool;
+        this.arrayPool = arrayPool;
     }
 
     @Override
     public boolean handles(@NonNull InputStream source, @NonNull Options options) throws IOException {
-        boolean is9png = isIs9png(source);
+        Log.d(TAG, "handles: ");
+        boolean is9png = NinePngUtils.isIs9png(source, arrayPool);
         Log.d(TAG, "handles: is9png=" + is9png);
-//        options.set(IS_9PNG, is9png);
+        options.set(Constants.IS_9PNG, is9png);
+
         return is9png;
     }
 
@@ -46,7 +52,5 @@ public class StreamBitmap9pngDecoder implements ResourceDecoder<InputStream, Bit
         return BitmapResource.obtain(bitmap, bitmapPool);
     }
 
-    public static boolean isIs9png(@NonNull InputStream source) throws IOException {
-        return NinePngUtils.is9png(source);
-    }
+
 }

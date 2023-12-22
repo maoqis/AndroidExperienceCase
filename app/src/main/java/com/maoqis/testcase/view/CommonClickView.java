@@ -11,7 +11,7 @@ import com.maoqis.testcase.R;
 public class CommonClickView extends androidx.appcompat.widget.AppCompatTextView {
     public CommonClickView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        setPadding(0, 5, 0, 5);
+        setPadding(0, 9, 0, 9);
         setMinHeight(context.getResources().getDimensionPixelSize(R.dimen.dp_48));
     }
 

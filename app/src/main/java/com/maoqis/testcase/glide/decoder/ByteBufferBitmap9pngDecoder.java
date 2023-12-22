@@ -13,14 +13,15 @@ import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 import com.bumptech.glide.util.ByteBufferUtil;
-import com.maoqis.testcase.glide.NinePngUtils;
+import com.maoqis.testcase.glide.Constants;
+import com.maoqis.testcase.glide.utils.NinePngUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 public class ByteBufferBitmap9pngDecoder implements ResourceDecoder<ByteBuffer, Bitmap> {
-    private static final String TAG = "ByteBufferBitmapWebpDec";
+    private static final String TAG = "ByteBufferBitmap9pngDecoder";
     private final BitmapPool bitmapPool;
 
 
@@ -30,22 +31,26 @@ public class ByteBufferBitmap9pngDecoder implements ResourceDecoder<ByteBuffer, 
 
 
     @Override
-    public boolean handles(@NonNull ByteBuffer source, @NonNull Options options) throws IOException {
+    public boolean handles(@NonNull ByteBuffer source, @NonNull Options options) {
 
-        boolean is9png = isIs9png(source);
+        boolean is9png = false;
+        try {
+            is9png = NinePngUtils.is9png(source);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Log.d(TAG, "handles: is9png=" + is9png);
-//        options.set(IS_9PNG, is9png);
+        options.set(Constants.IS_9PNG, is9png);
+
         return is9png;
     }
 
-    public static boolean isIs9png(@NonNull ByteBuffer source) {
-        boolean is9png = NinePngUtils.is9png(source);
-        return is9png;
-    }
 
     @Override
     public Resource<Bitmap> decode(@NonNull ByteBuffer source, int width, int height, @NonNull Options options) throws IOException {
-        Log.d(TAG, "decode: ");
+
+        boolean is9png = options.get(Constants.IS_9PNG);
+        Log.d(TAG, "decode: is9png=" + is9png);
         InputStream is = ByteBufferUtil.toStream(source);
         Bitmap bitmap = BitmapFactory.decodeStream(is, null, new BitmapFactory.Options());
         return BitmapResource.obtain(bitmap, bitmapPool);
