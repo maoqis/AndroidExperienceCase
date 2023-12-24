@@ -26,6 +26,11 @@ import java.util.ArrayList;
 
 public class NinePngUtils {
     private static final String TAG = "NinePngUtils";
+    /**
+     * TODO: 需要计算9png 块(npTc)的数据。
+     * 可以结果反推，第一个块HDR，应该就在后面几个块中。如果npTc块位置在后面，那读取就不方便。
+     */
+    public static final int MAX_32_NUM_9PNG_HEAD = 32;//200byte = 4byte * [(HDR: 1+1+13/4) + ... + npTc:(2+?)]
 
 
     @NonNull
@@ -132,7 +137,7 @@ public class NinePngUtils {
         if (reader.readInt() != 0x89504e47 || reader.readInt() != 0x0D0A1A0A) {
             return null;
         }
-        int max32Num = 300;
+        int max32Num = MAX_32_NUM_9PNG_HEAD;
         while (true) {
             if (max32Num <= 0) {
                 return null;
@@ -162,7 +167,7 @@ public class NinePngUtils {
         if (reader.getUInt32() != 0x89504e47 || reader.getUInt32() != 0x0D0A1A0A) {
             return null;
         }
-        int max32Num = 300;
+        int max32Num = MAX_32_NUM_9PNG_HEAD;
         while (true) {
             if (max32Num <= 0) {
                 return null;

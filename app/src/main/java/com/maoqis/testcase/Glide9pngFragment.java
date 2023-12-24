@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.Registry;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.EncodeStrategy;
@@ -149,8 +150,8 @@ public class Glide9pngFragment extends BaseCaseFragment {
                     .asBitmap()
                     .dontAnimate()
                     .diskCacheStrategy(NONE)
-                    .load(fileChuck)
-//                    .load(urlChunk)
+//                    .load(fileChuck)
+                    .load(urlChunk)
                     .into(new CustomTarget<Bitmap>() {
                         @Override
                         public void onResourceReady(@NonNull Bitmap bitmap, @Nullable Transition<? super Bitmap> transition) {
@@ -176,7 +177,8 @@ public class Glide9pngFragment extends BaseCaseFragment {
                     .asBitmap()
                     .diskCacheStrategy(NONE)
                     .dontTransform()//默认的变化要去掉。
-                    .load(fileChuck)
+                    .load(urlChunk)
+//                    .load(fileChuck)
                     .into(ivAPPT);
         });
         findSetOnClickListener(R.id.tv_glide_9png_cache, v -> {
