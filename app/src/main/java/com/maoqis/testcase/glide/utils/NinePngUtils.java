@@ -30,7 +30,7 @@ public class NinePngUtils {
      * TODO: 需要计算9png 块(npTc)的数据。
      * 可以结果反推，第一个块HDR，应该就在后面几个块中。如果npTc块位置在后面，那读取就不方便。
      */
-    public static final int MAX_32_NUM_9PNG_HEAD = 32;//200byte = 4byte * [(HDR: 1+1+13/4) + ... + npTc:(2+?)]
+    public static final int MAX_32_NUM_9PNG_HEAD = 32;//200byte = 4byte * { 2(Png mark) + [(HDR: 1+1+13/4) + ... + npTc:(2+?)]}
 
 
     @NonNull
