@@ -48,12 +48,17 @@ public class NinePatchGlideModule extends LibraryGlideModule {
 //        缓存时候用到
         BitmapEncoder bitmapEncoder = new NineBitmapEncoder(arrayPool);
         registry.prepend(Bitmap.class, bitmapEncoder);
+    }
+
+    public  static void replaceImageViewTargetFactory(@NonNull Glide glide) {
         //反射设置，NinePatchImageViewTargetFactory ，适配ImageView
         try {
             Field field = glide.getClass().getDeclaredField("glideContext");
             field.setAccessible(true);
             GlideContext glideContext = (GlideContext) field.get(glide);
             field.setAccessible(false);
+
+
             field = glideContext.getClass().getDeclaredField("imageViewTargetFactory");
             field.setAccessible(true);
             ImageViewTargetFactory imageViewTargetFactory = (ImageViewTargetFactory) field.get(glideContext);
@@ -64,7 +69,6 @@ public class NinePatchGlideModule extends LibraryGlideModule {
 
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

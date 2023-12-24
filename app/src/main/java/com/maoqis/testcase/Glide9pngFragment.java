@@ -2,7 +2,10 @@ package com.maoqis.testcase;
 
 import static android.os.Environment.DIRECTORY_PICTURES;
 
+import static com.bumptech.glide.load.engine.DiskCacheStrategy.ALL;
+import static com.bumptech.glide.load.engine.DiskCacheStrategy.DATA;
 import static com.bumptech.glide.load.engine.DiskCacheStrategy.NONE;
+import static com.bumptech.glide.load.engine.DiskCacheStrategy.RESOURCE;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
@@ -19,15 +22,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.Registry;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.EncodeStrategy;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.maoqis.testcase.component.BaseCaseFragment;
+import com.maoqis.testcase.glide.NinePatchGlideModule;
+import com.maoqis.testcase.glide.encode.NineBitmapEncoder;
 import com.maoqis.testcase.glide.utils.NinePngUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -56,6 +56,7 @@ public class Glide9pngFragment extends BaseCaseFragment {
 //        https://www.ffsup.com/ 图片30天过期，自己上传吧：https://f0.0sm.com/node0/2023/12/86587D8BBFF8072C-dd1df953adff45e2.png
         String urlChunk = "https://f0.0sm.com/node0/2023/12/86587D8BBFF8072C-dd1df953adff45e2.png";
         File fileChuck = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES), "ninepatch_bubble_chunk.9.png");
+
 
         //source not appt
         findSetOnClickListener(R.id.tv_source_not_appt, v -> {
@@ -149,7 +150,7 @@ public class Glide9pngFragment extends BaseCaseFragment {
             GlideApp.with(getActivity())
                     .asBitmap()
                     .dontAnimate()
-                    .diskCacheStrategy(NONE)
+                    .diskCacheStrategy(ALL)
 //                    .load(fileChuck)
                     .load(urlChunk)
                     .into(new CustomTarget<Bitmap>() {
@@ -172,6 +173,11 @@ public class Glide9pngFragment extends BaseCaseFragment {
         });
         findSetOnClickListener(R.id.tv_glide_custom_9png, v -> {
 
+            NinePatchGlideModule.replaceImageViewTargetFactory(GlideApp.get(this.getActivity().getApplicationContext()));
+
+            /**
+             *需要去掉，{@link NineBitmapEncoder}
+             */
 
             GlideApp.with(this)
                     .asBitmap()
@@ -183,53 +189,18 @@ public class Glide9pngFragment extends BaseCaseFragment {
         });
         findSetOnClickListener(R.id.tv_glide_9png_cache, v -> {
             Log.d(TAG, "onInitView: ");
-            DiskCacheStrategy strategy = new DiskCacheStrategy() {
-                @Override
-                public boolean isDataCacheable(DataSource dataSource) {
-                    return false;
-                }
-
-                @Override
-                public boolean isResourceCacheable(
-                        boolean isFromAlternateCacheKey, DataSource dataSource, EncodeStrategy encodeStrategy) {
-                    return dataSource != DataSource.RESOURCE_DISK_CACHE
-                            && dataSource != DataSource.DATA_DISK_CACHE;
-                }
-
-                @Override
-                public boolean decodeCachedResource() {
-                    return false;
-                }
-
-                @Override
-                public boolean decodeCachedData() {
-                    return false;
-                }
-            };
-            strategy = NONE;
+            //set in application.onCreate
+            NinePatchGlideModule.replaceImageViewTargetFactory(GlideApp.get(this.getActivity().getApplicationContext()));
+            /**
+             * NineBitmapEncoder中直接返回了Source策略，保存的file不做转化。
+             * 见：/data/user/0/com.maoqis.testcase/cache/image_manager_disk_cache23ae35c87a0847140a03006afa1a6d82840f64c371125bee1463e3f1840edd21.0
+             */
             GlideApp.with(getActivity())
                     .asBitmap()
-                    .dontAnimate()
-                    .diskCacheStrategy(strategy)
-//                    .load()
                     .load(urlChunk)
-                    .into(new CustomTarget<Bitmap>() {
-                        @Override
-                        public void onResourceReady(@NonNull Bitmap bitmap, @Nullable Transition<? super Bitmap> transition) {
-                            Drawable drawable = get9pngBitmapDrawable(bitmap);
-                            ivAPPT.setImageDrawable(drawable);
-                        }
-
-                        @Override
-                        public void onLoadCleared(@Nullable Drawable placeholder) {
-                            Log.d(TAG, "onLoadCleared() called with: placeholder = [" + placeholder + "]");
-                        }
-
-                        @Override
-                        public void onLoadFailed(@Nullable Drawable errorDrawable) {
-                            super.onLoadFailed(errorDrawable);
-                        }
-                    });
+                    .dontTransform()
+                    .diskCacheStrategy(ALL)
+                    .into(ivAPPT);
 
         });
 

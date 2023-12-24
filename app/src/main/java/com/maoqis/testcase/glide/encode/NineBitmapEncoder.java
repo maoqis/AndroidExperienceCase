@@ -29,13 +29,8 @@ public class NineBitmapEncoder extends BitmapEncoder {
     public boolean encode(@NonNull Resource<Bitmap> resource, @NonNull File file, @NonNull Options options) {
         Bitmap bitmap = resource.get();
         boolean is9png = NinePngUtils.is9png(bitmap);
-        Log.d(TAG, "encode: is9png=" + is9png + " to=" + file.getPath());
+        Log.d(TAG, "encode: bitmap is9png=" + is9png + "不保存文件，后续块缓存文件什么时候创建 to=" + file.getPath());
         if (is9png) {
-            saveBitmapToFile(file, bitmap);
-            if (BuildConfig.DEBUG) {
-                is9png = NinePngUtils.is9png(file);
-                Log.d(TAG, "encoded file: is9png=" + is9png);
-            }
             return true;
         }
 
