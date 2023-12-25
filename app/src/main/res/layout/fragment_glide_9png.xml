@@ -98,14 +98,14 @@
             android:id="@+id/tv_glide_9png_skip_trans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="9. 不用收到设置dontTransform方法：使用NinePngGlideExtension 跳过into 方法中设置的Transform。点击->">
+            android:text="9. 不用手动设置dontTransform方法：使用NinePngGlideExtension 跳过into 方法中设置的Transform。点击->">
 
         </com.maoqis.testcase.view.CommonClickView>
 
         <com.maoqis.testcase.view.CommonClickView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="到这已经不用单独配置Glide load调用处来适配9png图片加载了。有哪个卡片需要适配圆角，那直接用编译后的9png就可以。\n
+            android:text="到这已经不用单独配置Glide load调用处，来适配9png图片加载了。有哪个卡片需要适配圆角，那直接用编译后的9png就可以。\n
             TODO：1. 密度问题，以3倍图为设计稿;
             2. 确保反射不出现机型异常，或者直接该Glide原代码，把private 改成直接访问避免该问题;
             3. 重构成一个Module，提交到maven 仓库。"
