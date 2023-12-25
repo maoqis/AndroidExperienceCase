@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide.encode;
+package com.maoqis.testcase.glide.encoder;
 
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -10,8 +10,7 @@ import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.ArrayPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapEncoder;
-import com.maoqis.testcase.BuildConfig;
-import com.maoqis.testcase.glide.Constants;
+import com.maoqis.testcase.glide.utils.Constants;
 import com.maoqis.testcase.glide.utils.NinePngUtils;
 
 import java.io.File;

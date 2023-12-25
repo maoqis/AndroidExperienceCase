@@ -3,9 +3,7 @@ package com.maoqis.testcase;
 import static android.os.Environment.DIRECTORY_PICTURES;
 
 import static com.bumptech.glide.load.engine.DiskCacheStrategy.ALL;
-import static com.bumptech.glide.load.engine.DiskCacheStrategy.DATA;
 import static com.bumptech.glide.load.engine.DiskCacheStrategy.NONE;
-import static com.bumptech.glide.load.engine.DiskCacheStrategy.RESOURCE;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
@@ -26,9 +24,10 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.maoqis.testcase.component.BaseCaseFragment;
-import com.maoqis.testcase.glide.NinePatchGlideModule;
-import com.maoqis.testcase.glide.encode.NineBitmapEncoder;
+import com.maoqis.testcase.glide.GlideNinePngApi;
+import com.maoqis.testcase.glide.encoder.NineBitmapEncoder;
 import com.maoqis.testcase.glide.utils.NinePngUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -45,6 +44,8 @@ public class Glide9pngFragment extends BaseCaseFragment {
     @SuppressLint("CheckResult")
     @Override
     protected void onInitView(ViewGroup rootView) {
+
+
         ImageView ivH48 = rootView.findViewById(R.id.iv_h48);
         ImageView ivAPPT = rootView.findViewById(R.id.iv_appt);
 
@@ -173,13 +174,13 @@ public class Glide9pngFragment extends BaseCaseFragment {
         });
         findSetOnClickListener(R.id.tv_glide_custom_9png, v -> {
 
-            NinePatchGlideModule.replaceImageViewTargetFactory(GlideApp.get(this.getActivity().getApplicationContext()));
+            GlideNinePngApi.afterGlideInit(GlideApp.get(this.getActivity().getApplicationContext()));
 
             /**
              *需要去掉，{@link NineBitmapEncoder}
              */
 
-            GlideApp.with(this)
+            GlideApp.with(getActivity())
                     .asBitmap()
                     .diskCacheStrategy(NONE)
                     .dontTransform()//默认的变化要去掉。
@@ -190,7 +191,8 @@ public class Glide9pngFragment extends BaseCaseFragment {
         findSetOnClickListener(R.id.tv_glide_9png_cache, v -> {
             Log.d(TAG, "onInitView: ");
             //set in application.onCreate
-            NinePatchGlideModule.replaceImageViewTargetFactory(GlideApp.get(this.getActivity().getApplicationContext()));
+
+            GlideNinePngApi.afterGlideInit(GlideApp.get(this.getActivity().getApplicationContext()));
             /**
              * NineBitmapEncoder中直接返回了Source策略，保存的file不做转化。
              * 见：/data/user/0/com.maoqis.testcase/cache/image_manager_disk_cache23ae35c87a0847140a03006afa1a6d82840f64c371125bee1463e3f1840edd21.0
@@ -198,7 +200,7 @@ public class Glide9pngFragment extends BaseCaseFragment {
             GlideApp.with(getActivity())
                     .asBitmap()
                     .load(urlChunk)
-                    .dontTransform()
+//                    .dontTransform()// 使用NinePngGlideExtension 拦截了optionalCenterCrop。
                     .diskCacheStrategy(ALL)
                     .into(ivAPPT);
 

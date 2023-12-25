@@ -3,27 +3,22 @@ package com.maoqis.testcase.glide;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.os.ParcelFileDescriptor;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.GlideContext;
 import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.engine.bitmap_recycle.ArrayPool;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapEncoder;
 import com.bumptech.glide.module.LibraryGlideModule;
-import com.bumptech.glide.request.target.ImageViewTargetFactory;
 import com.maoqis.testcase.glide.decoder.ByteBufferBitmap9pngDecoder;
 import com.maoqis.testcase.glide.decoder.StreamBitmap9pngDecoder;
-import com.maoqis.testcase.glide.encode.NineBitmapEncoder;
+import com.maoqis.testcase.glide.encoder.NineBitmapEncoder;
 
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 
 @GlideModule
@@ -50,26 +45,7 @@ public class NinePatchGlideModule extends LibraryGlideModule {
         registry.prepend(Bitmap.class, bitmapEncoder);
     }
 
-    public  static void replaceImageViewTargetFactory(@NonNull Glide glide) {
-        //反射设置，NinePatchImageViewTargetFactory ，适配ImageView
-        try {
-            Field field = glide.getClass().getDeclaredField("glideContext");
-            field.setAccessible(true);
-            GlideContext glideContext = (GlideContext) field.get(glide);
-            field.setAccessible(false);
 
 
-            field = glideContext.getClass().getDeclaredField("imageViewTargetFactory");
-            field.setAccessible(true);
-            ImageViewTargetFactory imageViewTargetFactory = (ImageViewTargetFactory) field.get(glideContext);
-            ImageViewTargetFactory factory = new NinePatchImageViewTargetFactory(imageViewTargetFactory);
-            field.set(glideContext, factory);
-            field.setAccessible(false);
-            Log.d(TAG, "已设置NinePatchImageViewTargetFactory: 原imageViewTargetFactory=" + imageViewTargetFactory);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 }

@@ -12,7 +12,7 @@ import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.ArrayPool;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
-import com.maoqis.testcase.glide.Constants;
+import com.maoqis.testcase.glide.utils.Constants;
 import com.maoqis.testcase.glide.utils.NinePngUtils;
 
 import java.io.IOException;

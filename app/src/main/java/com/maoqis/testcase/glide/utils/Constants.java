@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide;
+package com.maoqis.testcase.glide.utils;
 
 import com.bumptech.glide.load.Option;
 

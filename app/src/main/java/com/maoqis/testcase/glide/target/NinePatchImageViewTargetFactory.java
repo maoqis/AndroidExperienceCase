@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide;
+package com.maoqis.testcase.glide.target;
 
 import android.graphics.Bitmap;
 import android.util.Log;
