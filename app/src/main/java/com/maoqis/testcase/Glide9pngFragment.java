@@ -139,7 +139,7 @@ public class Glide9pngFragment extends BaseCaseFragment {
                     });
         });
 
-        findSetOnClickListener(R.id.tv_glide_appt, v -> {
+        findSetOnClickListener(R.id.tv_glide_decoder, v -> {
 
 
 //            no. debug发现，读取文件时候就丢失了块信息。要研读的时候是否可以直接读原文件。或者是因为ByteBufferReader的问题。
@@ -151,7 +151,7 @@ public class Glide9pngFragment extends BaseCaseFragment {
             GlideApp.with(getActivity())
                     .asBitmap()
                     .dontAnimate()
-                    .diskCacheStrategy(ALL)
+                    .diskCacheStrategy(NONE)
 //                    .load(fileChuck)
                     .load(urlChunk)
                     .into(new CustomTarget<Bitmap>() {
@@ -188,8 +188,9 @@ public class Glide9pngFragment extends BaseCaseFragment {
 //                    .load(fileChuck)
                     .into(ivAPPT);
         });
+
         findSetOnClickListener(R.id.tv_glide_9png_cache, v -> {
-            Log.d(TAG, "onInitView: ");
+            Log.d(TAG, "tv_glide_9png_cache: ");
             //set in application.onCreate
 
             GlideNinePngApi.afterGlideInit(GlideApp.get(this.getActivity().getApplicationContext()));
@@ -197,6 +198,20 @@ public class Glide9pngFragment extends BaseCaseFragment {
              * NineBitmapEncoder中直接返回了Source策略，保存的file不做转化。
              * 见：/data/user/0/com.maoqis.testcase/cache/image_manager_disk_cache23ae35c87a0847140a03006afa1a6d82840f64c371125bee1463e3f1840edd21.0
              */
+            GlideApp.with(getActivity())
+                    .asBitmap()
+                    .load(urlChunk)
+                    .dontTransform()//如果没配置使用NinePngGlideExtension，则需要配置dontTransform，排查into时候Transform。
+                    .diskCacheStrategy(ALL)
+                    .into(ivAPPT);
+
+        });
+
+        //9,
+        findSetOnClickListener(R.id.tv_glide_9png_skip_trans, v -> {
+            Log.d(TAG, "tv_glide_9png_skip_trans: ");
+
+            GlideNinePngApi.afterGlideInit(GlideApp.get(this.getActivity().getApplicationContext()));
             GlideApp.with(getActivity())
                     .asBitmap()
                     .load(urlChunk)

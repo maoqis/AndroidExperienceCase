@@ -1,96 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_root"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_root"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="1. 加载res文件中9.png，打包时候已经经过aapt编译：通过是否有边线，来判断是否是9.png。" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="360dp"
-        android:layout_height="48dp"
-        android:src="@drawable/ninepatch_bubble"></ImageView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="1. 加载res文件中9.png，打包时候已经经过aapt编译：通过是否有边线，来判断是否是9.png。" />
 
-    <com.maoqis.testcase.view.CommonClickView
-        android:id="@+id/tv_source_not_appt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="2. 直接加载，原ninepatch_bubble.9.png，未使用appt命令编译前的图片 ->" />
+        <ImageView
+            android:layout_width="360dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ninepatch_bubble"></ImageView>
 
-
-    <ImageView
-        android:id="@+id/iv_h48"
-        android:layout_width="360dp"
-        android:layout_height="48dp">
-
-    </ImageView>
-
-    <com.maoqis.testcase.view.CommonClickView
-        android:id="@+id/tv_not_appt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="3. 发现原因：判断不了是否是9.png，使用assets目录读取原文件ninepatch_bubble.9.png流和读文件是一样的。点击->">
-
-    </com.maoqis.testcase.view.CommonClickView>
-
-    <com.maoqis.testcase.view.CommonClickView
-        android:id="@+id/tv_appt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="4. 成功: is9png。方案：编译为带chunk的png图片ninepatch_bubble_chunk.9.png（预览看起来跟正常图片无异）；`aapt s -i [文件名] -o [文件名]` 点击对比->"
-        android:textColor="@color/purple_500">
-
-    </com.maoqis.testcase.view.CommonClickView>
+        <com.maoqis.testcase.view.CommonClickView
+            android:id="@+id/tv_source_not_appt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="2. 直接加载，原ninepatch_bubble.9.png，未使用appt命令编译前的图片, 有边线2px * 2px ->" />
 
 
-    <ImageView
-        android:id="@+id/iv_appt"
-        android:scaleType="fitXY"
-        android:layout_width="360dp"
-        android:layout_height="48dp">
-    </ImageView>
+        <ImageView
+            android:id="@+id/iv_h48"
+            android:layout_width="360dp"
+            android:layout_height="48dp">
 
-    <com.maoqis.testcase.view.CommonClickView
-        android:id="@+id/tv_glide_appt_only_download"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="5. glide onlyDownload ok。点击-> 。"/>
+        </ImageView>
 
-    <com.maoqis.testcase.view.CommonClickView
-        android:id="@+id/tv_glide_appt"
-        android:textColor="@android:color/holo_red_dark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="6. glide不支持直接加载appt后的9.png。 主要因为Downsampler解码时候，丢失了9.png信息。要自定义Glide 9png的解码器，handlers方法返回是否是9.png。点击-> 。">
+        <com.maoqis.testcase.view.CommonClickView
+            android:id="@+id/tv_not_appt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3. 发现原因：not appt ：使用assets目录读取原文件（appt前）ninepatch_bubble.9.png流和读文件是一样的。点击->">
 
-    </com.maoqis.testcase.view.CommonClickView>
+        </com.maoqis.testcase.view.CommonClickView>
 
-    <com.maoqis.testcase.view.CommonClickView
-        android:id="@+id/tv_glide_custom_9png"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="7. 之后Glide使用自定义ImageViewTargetFactory，适配into.(ImageView) 点击设置->。 再次点击上方按钮试下">
-    </com.maoqis.testcase.view.CommonClickView>
+        <com.maoqis.testcase.view.CommonClickView
+            android:id="@+id/tv_appt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4. 使用appt后文件ninepatch_bubble_chunk.9.png，加载成功 。`aapt s -i [文件名] -o [文件名]` 点击对比->"
+            android:textColor="@color/purple_500">
 
-    <com.maoqis.testcase.view.CommonClickView
-        android:id="@+id/tv_glide_9png_cache"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="8. 最后是使用缓存策略，使网络加载时候，存的文件缓存不压缩。可能要修改加码器">
-    </com.maoqis.testcase.view.CommonClickView>
-
-    <com.maoqis.testcase.view.CommonClickView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="思考：9.png还是需要放到对应密度的目录进行编译，这样圆角可以根据不同密度进行放缩。另外的问题是，图标预览不太方便，可能需要专门的工具。最后webp的体积已经可以替代9.png了。\n但是如果有些地方需要动态下发圆角，图标中文字不拉伸失真，也是一种灵活方案。不需要发版，而且灵活性好。\n开屏是否可以有四周有内容不拉伸的全屏需求？"
-        android:textColor="@color/purple_500">
-    </com.maoqis.testcase.view.CommonClickView>
+        </com.maoqis.testcase.view.CommonClickView>
 
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/iv_appt"
+            android:layout_width="360dp"
+            android:layout_height="48dp"
+            android:scaleType="fitXY">
+
+        </ImageView>
+
+        <com.maoqis.testcase.view.CommonClickView
+            android:id="@+id/tv_glide_appt_only_download"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5. glide onlyDownload ok。into 返回file资源 点击-> 。" />
+
+        <com.maoqis.testcase.view.CommonClickView
+            android:id="@+id/tv_glide_decoder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6. 不采样解码器解析9png：自定义ByteBufferBitmap9pngDecoder（直接解析网络ByteBuffer）
+            和 StreamBitmap9pngDecoder（解析缓存文件InputStream转Bitmap），来保留9png块，handlers方法返回true标识该解码器处理转换。
+            \n 另外需要自定义编码器NineBitmapEncoder返回Source，以保证缓存文件为原数据流，而非经Bitmap转换的temp文件）点击->"
+            android:textColor="@android:color/holo_red_dark">
+
+        </com.maoqis.testcase.view.CommonClickView>
+
+        <com.maoqis.testcase.view.CommonClickView
+            android:id="@+id/tv_glide_custom_9png"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="7. 不用手动将Bitmap转成NinePatchDrawable：自定义ImageViewTargetFactory。 点击->">
+
+        </com.maoqis.testcase.view.CommonClickView>
+
+        <com.maoqis.testcase.view.CommonClickView
+            android:id="@+id/tv_glide_9png_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="8. 可以使用缓存： 修改加码器NineBitmapEncoder 返回 Source。点击->">
+
+        </com.maoqis.testcase.view.CommonClickView>
+
+        <com.maoqis.testcase.view.CommonClickView
+            android:id="@+id/tv_glide_9png_skip_trans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="9. 不用收到设置dontTransform方法：使用NinePngGlideExtension 跳过into 方法中设置的Transform。点击->">
+
+        </com.maoqis.testcase.view.CommonClickView>
+
+        <com.maoqis.testcase.view.CommonClickView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="到这已经不用单独配置Glide load调用处来适配9png图片加载了。有哪个卡片需要适配圆角，那直接用编译后的9png就可以。\n
+            TODO：1. 密度问题，以3倍图为设计稿;
+            2. 确保反射不出现机型异常，或者直接该Glide原代码，把private 改成直接访问避免该问题;
+            3. 重构成一个Module，提交到maven 仓库。"
+
+
+            android:textColor="@color/purple_500">
+
+        </com.maoqis.testcase.view.CommonClickView>
+
+
+    </LinearLayout>
+</ScrollView>
