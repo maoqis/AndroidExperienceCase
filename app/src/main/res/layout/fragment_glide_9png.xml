@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="Glide.with(x).load(x).into(ImageView) 3部曲的优点是什么？with的管理生命周期管理；into ImageView的便捷性，断网重连再加载是如何配置的，是否需要into ImageView？；load的活动缓存、内容缓存、磁盘缓存的管理。" />
+            android:text="Glide.with(x).load(x).into(ImageView) 3部曲的优点是什么？with的管理生命周期管理；into ImageView的便捷性，断网重连再加载是如何配置的，是否需要into ImageView？；load的活动缓存、公用内存缓存、磁盘缓存的管理。" />
 
         <TextView
             android:layout_width="match_parent"
