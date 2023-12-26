@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide.resource;
+package com.bumptech.glide.ninepng.resource;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -15,14 +15,13 @@ import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 import com.bumptech.glide.util.Preconditions;
-import com.maoqis.testcase.glide.utils.NinePngUtils;
+import com.bumptech.glide.ninepng.utils.NinePngUtils;
 
 /**
  * LazyBitmapDrawableResource final 无法继承
  */
-public class LazyNineDrawableResource implements Resource<NinePatchDrawable>, Initializable {
-    private static final String TAG = "LazyNineDrawableResource";
-
+public class LazyNinePngDrawableResource implements Resource<NinePatchDrawable>, Initializable {
+    private static final String TAG = "NinePngDrawableResource";
     private final Resources resources;
     private final Resource<Bitmap> bitmapResource;
 
@@ -31,8 +30,8 @@ public class LazyNineDrawableResource implements Resource<NinePatchDrawable>, In
      * {@link Bitmap}s from their wrapped {@link Resource}.
      */
     @Deprecated
-    public static LazyNineDrawableResource obtain(Context context, Bitmap bitmap) {
-        return (LazyNineDrawableResource)
+    public static LazyNinePngDrawableResource obtain(Context context, Bitmap bitmap) {
+        return (LazyNinePngDrawableResource)
                 obtain(
                         context.getResources(),
                         BitmapResource.obtain(bitmap, Glide.get(context).getBitmapPool()));
@@ -43,9 +42,9 @@ public class LazyNineDrawableResource implements Resource<NinePatchDrawable>, In
      * {@link Bitmap}s from their wrapped {@link Resource}.
      */
     @Deprecated
-    public static LazyNineDrawableResource obtain(
+    public static LazyNinePngDrawableResource obtain(
             Resources resources, BitmapPool bitmapPool, Bitmap bitmap) {
-        return (LazyNineDrawableResource)
+        return (LazyNinePngDrawableResource)
                 obtain(resources, BitmapResource.obtain(bitmap, bitmapPool));
     }
 
@@ -55,10 +54,10 @@ public class LazyNineDrawableResource implements Resource<NinePatchDrawable>, In
         if (bitmapResource == null) {
             return null;
         }
-        return new LazyNineDrawableResource(resources, bitmapResource);
+        return new LazyNinePngDrawableResource(resources, bitmapResource);
     }
 
-    private LazyNineDrawableResource(
+    private LazyNinePngDrawableResource(
             @NonNull Resources resources, @NonNull Resource<Bitmap> bitmapResource) {
         this.resources = Preconditions.checkNotNull(resources);
         this.bitmapResource = Preconditions.checkNotNull(bitmapResource);

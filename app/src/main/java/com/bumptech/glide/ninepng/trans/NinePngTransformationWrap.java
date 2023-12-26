@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide.trans;
+package com.bumptech.glide.ninepng.trans;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,15 +8,15 @@ import androidx.annotation.NonNull;
 
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
-import com.maoqis.testcase.glide.utils.NinePngUtils;
+import com.bumptech.glide.ninepng.utils.NinePngUtils;
 
 import java.security.MessageDigest;
 
-public class NineTransformationWrap implements Transformation<Bitmap> {
-    private static final String TAG = "NineTransformationWrap";
+public class NinePngTransformationWrap implements Transformation<Bitmap> {
+    private static final String TAG = "NinePngTransformationWr";
     Transformation<Bitmap> bitmapTransformation;
 
-    public NineTransformationWrap(Transformation<Bitmap> bitmapTransformation) {
+    public NinePngTransformationWrap(Transformation<Bitmap> bitmapTransformation) {
         this.bitmapTransformation = bitmapTransformation;
     }
 

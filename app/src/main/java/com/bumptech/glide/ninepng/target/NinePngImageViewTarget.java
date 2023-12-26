@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide.target;
+package com.bumptech.glide.ninepng.target;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,14 +6,14 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.bumptech.glide.ninepng.utils.NinePngUtils;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.maoqis.testcase.glide.utils.NinePngUtils;
 
-public class NineBitmapImageViewTarget extends BitmapImageViewTarget {
-    private static final String TAG = "NineBitmapImageViewTarg";
+public class NinePngImageViewTarget extends BitmapImageViewTarget {
+    private static final String TAG = "NinePngImageViewTarget";
     Context contextApp;
 
-    public NineBitmapImageViewTarget(ImageView view) {
+    public NinePngImageViewTarget(ImageView view) {
         super(view);
         contextApp = view.getContext();
     }

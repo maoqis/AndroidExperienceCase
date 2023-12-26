@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide.decoder;
+package com.bumptech.glide.ninepng.decoder;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -11,21 +11,18 @@ import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.ResourceDecoder;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.ArrayPool;
+import com.bumptech.glide.ninepng.resource.LazyNinePngDrawableResource;
 import com.bumptech.glide.util.Preconditions;
-import com.maoqis.testcase.glide.resource.LazyNineDrawableResource;
-import com.maoqis.testcase.glide.utils.NinePngUtils;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
 
-public class NineBitmapDrawableDecoder<DataType> implements ResourceDecoder<DataType, NinePatchDrawable> {
+public class NinePatchDrawableDecoder<DataType> implements ResourceDecoder<DataType, NinePatchDrawable> {
     private static final String TAG = "NineBitmapDrawableDecoder";
     private final ResourceDecoder<DataType, Bitmap> decoder;
     private final Resources resources;
     private final ArrayPool arrayPool;
 
-    public NineBitmapDrawableDecoder(
+    public NinePatchDrawableDecoder(
             @NonNull Resources resources, @NonNull ResourceDecoder<DataType, Bitmap> decoder, ArrayPool arrayPool) {
         this.resources = Preconditions.checkNotNull(resources);
         this.decoder = Preconditions.checkNotNull(decoder);
@@ -46,6 +43,6 @@ public class NineBitmapDrawableDecoder<DataType> implements ResourceDecoder<Data
 
         Log.d(TAG, "decode: source=" + source);
         Resource<Bitmap> bitmapResource = decoder.decode(source, width, height, options);
-        return LazyNineDrawableResource.obtain(resources, bitmapResource);
+        return LazyNinePngDrawableResource.obtain(resources, bitmapResource);
     }
 }

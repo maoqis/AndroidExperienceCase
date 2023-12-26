@@ -1,6 +1,5 @@
-package com.maoqis.testcase.glide.encoder;
+package com.bumptech.glide.ninepng.encoder;
 
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.util.Log;
 
@@ -13,11 +12,11 @@ import com.bumptech.glide.load.engine.Resource;
 
 import java.io.File;
 
-public class NineDrawableEncoder implements ResourceEncoder<NinePatchDrawable>  {
-   private static final String TAG = "NineDrawableEncoder";
-   private final NineBitmapEncoder bitmapEncoder;
+public class NinePngDrawableEncoder implements ResourceEncoder<NinePatchDrawable>  {
+   private static final String TAG = "NinePngDrawableEncoder";
+   private final NinePngBitmapEncoder bitmapEncoder;
 
-   public NineDrawableEncoder(NineBitmapEncoder bitmapEncoder) {
+   public NinePngDrawableEncoder(NinePngBitmapEncoder bitmapEncoder) {
       this.bitmapEncoder = bitmapEncoder;
    }
 

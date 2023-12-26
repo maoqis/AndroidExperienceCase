@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide.target;
+package com.bumptech.glide.ninepng.target;
 
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.request.target.ImageViewTargetFactory;
 import com.bumptech.glide.request.target.ViewTarget;
 
-public class NinePatchImageViewTargetFactory extends ImageViewTargetFactory {
+public class NinePngImageViewTargetFactory extends ImageViewTargetFactory {
     private static final String TAG = "ImageViewTargetFactory";
     ImageViewTargetFactory imageViewTargetFactory;
 
-    public NinePatchImageViewTargetFactory(ImageViewTargetFactory real) {
+    public NinePngImageViewTargetFactory(ImageViewTargetFactory real) {
         imageViewTargetFactory = real;
     }
 
@@ -26,7 +26,7 @@ public class NinePatchImageViewTargetFactory extends ImageViewTargetFactory {
         }
 
         if (Bitmap.class.equals(clazz)) {
-            return (ViewTarget<ImageView, Z>) new NineBitmapImageViewTarget(view);
+            return (ViewTarget<ImageView, Z>) new NinePngImageViewTarget(view);
         } else {
             return imageViewTargetFactory.buildTarget(view, clazz);
         }

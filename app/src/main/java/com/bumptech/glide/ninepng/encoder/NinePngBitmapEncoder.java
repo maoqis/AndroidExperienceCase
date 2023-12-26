@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide.encoder;
+package com.bumptech.glide.ninepng.encoder;
 
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -10,17 +10,16 @@ import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.ArrayPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapEncoder;
-import com.maoqis.testcase.glide.utils.Constants;
-import com.maoqis.testcase.glide.utils.NinePngUtils;
+import com.bumptech.glide.ninepng.utils.Constants;
+import com.bumptech.glide.ninepng.utils.NinePngUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class NineBitmapEncoder extends BitmapEncoder {
-    private static final String TAG = "NineBitmapEncoder";
-
-    public NineBitmapEncoder(@NonNull ArrayPool arrayPool) {
+public class NinePngBitmapEncoder extends BitmapEncoder {
+    private static final String TAG = "NinePngBitmapEncoder";
+    public NinePngBitmapEncoder(@NonNull ArrayPool arrayPool) {
         super(arrayPool);
     }
 

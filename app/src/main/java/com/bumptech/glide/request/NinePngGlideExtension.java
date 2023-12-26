@@ -20,12 +20,14 @@ import com.bumptech.glide.load.resource.bitmap.DrawableTransformation;
 import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.load.resource.gif.GifDrawableTransformation;
-import com.maoqis.testcase.glide.trans.NineDrawableTransformation;
-import com.maoqis.testcase.glide.trans.NineTransformationWrap;
+import com.bumptech.glide.ninepng.trans.NinePngDrawableTransformation;
+import com.bumptech.glide.ninepng.trans.NinePngTransformationWrap;
 
 import java.lang.reflect.Field;
 
 /**
+ * 因为包访问权限问题，暂只放到这个类中。
+ *
  * 1. .into时候，使用了几个transform。
  * 我们需要用NineTransformationWrap，把所有设置Transform的地方进行包装，在包装类里面进行判断9png不做bitmap转化，glide api中的转换都是Bitmap。
  * 2. 如果不asBimap(默认)，一定会经过DrawableTransformation .
@@ -55,7 +57,7 @@ public class NinePngGlideExtension {
         Log.d(TAG, "optionalCenterCrop() called with: options = [" + options + "]");
         //需要和BaseRequestOptions在 相同包名下才能直接调用
         try {
-            BaseRequestOptions<?> ret = options.optionalTransform(DownsampleStrategy.CENTER_OUTSIDE, new NineTransformationWrap(new CenterCrop()));
+            BaseRequestOptions<?> ret = options.optionalTransform(DownsampleStrategy.CENTER_OUTSIDE, new NinePngTransformationWrap(new CenterCrop()));
             return ret;
         } catch (Exception e) {
             Log.e(TAG, "optionalCenterCrop: ", e);
@@ -70,7 +72,7 @@ public class NinePngGlideExtension {
         //optionalScaleOnlyTransform 私有，需要用反射
         try {
             BaseRequestOptions<?> ret = optionalScaleOnlyTransform(options,
-                    DownsampleStrategy.CENTER_INSIDE, new NineTransformationWrap(new CenterInside()));
+                    DownsampleStrategy.CENTER_INSIDE, new NinePngTransformationWrap(new CenterInside()));
 
             return ret;
         } catch (Exception e) {
@@ -81,7 +83,7 @@ public class NinePngGlideExtension {
 
     @GlideOption(override = GlideOption.OVERRIDE_REPLACE)
     public static BaseRequestOptions<?> optionalCircleCrop(BaseRequestOptions<?> options) {
-        return options.optionalTransform(DownsampleStrategy.CENTER_OUTSIDE, new NineTransformationWrap(new CircleCrop()));
+        return options.optionalTransform(DownsampleStrategy.CENTER_OUTSIDE, new NinePngTransformationWrap(new CircleCrop()));
     }
 
     @GlideOption(override = GlideOption.OVERRIDE_REPLACE)
@@ -90,7 +92,7 @@ public class NinePngGlideExtension {
         //optionalScaleOnlyTransform 私有，需要用反射
         try {
             BaseRequestOptions<?> ret = optionalScaleOnlyTransform(options,
-                    DownsampleStrategy.FIT_CENTER, new NineTransformationWrap(new FitCenter()));
+                    DownsampleStrategy.FIT_CENTER, new NinePngTransformationWrap(new FitCenter()));
 
             return ret;
         } catch (Exception e) {
@@ -130,9 +132,9 @@ public class NinePngGlideExtension {
         // isAssignableFrom checks when obtaining the transformation later on. It can be removed without
         // affecting the functionality.
         /**
-         * {@link NineDrawableTransformation} ,如果碰到 子类（NineDrawableTransformation）放前面，先匹配到。
+         * {@link NinePngDrawableTransformation} ,如果碰到 子类（NineDrawableTransformation）放前面，先匹配到。
          */
-        options.transform(NinePatchDrawable.class, new NineDrawableTransformation(transformation), isRequired);
+        options.transform(NinePatchDrawable.class, new NinePngDrawableTransformation(transformation), isRequired);
         options.transform(BitmapDrawable.class, drawableTransformation.asBitmapDrawable(), isRequired);
         options.transform(GifDrawable.class, new GifDrawableTransformation(transformation), isRequired);
         return options.selfOrThrowIfLocked();
@@ -228,23 +230,23 @@ public class NinePngGlideExtension {
     @GlideOption(override = GlideOption.OVERRIDE_REPLACE)
     public static BaseRequestOptions<?> fitCenter(BaseRequestOptions<?> options) {
         //这里直接调用了，因为private
-        return scaleOnlyTransform(options, DownsampleStrategy.FIT_CENTER, new NineTransformationWrap(new FitCenter()));
+        return scaleOnlyTransform(options, DownsampleStrategy.FIT_CENTER, new NinePngTransformationWrap(new FitCenter()));
     }
 
     @GlideOption(override = GlideOption.OVERRIDE_REPLACE)
     public static BaseRequestOptions<?> centerInside(BaseRequestOptions<?> options) {
         //这里直接调用了，因为private
-        return scaleOnlyTransform(options, DownsampleStrategy.CENTER_INSIDE, new NineTransformationWrap(new CenterInside()));
+        return scaleOnlyTransform(options, DownsampleStrategy.CENTER_INSIDE, new NinePngTransformationWrap(new CenterInside()));
     }
 
     @GlideOption(override = GlideOption.OVERRIDE_REPLACE)
     public static BaseRequestOptions<?> centerCrop(BaseRequestOptions<?> options) {
-        return transform(options, DownsampleStrategy.CENTER_OUTSIDE, new NineTransformationWrap(new CenterCrop()));
+        return transform(options, DownsampleStrategy.CENTER_OUTSIDE, new NinePngTransformationWrap(new CenterCrop()));
     }
 
     @GlideOption(override = GlideOption.OVERRIDE_REPLACE)
     public static BaseRequestOptions<?> circleCrop(BaseRequestOptions<?> options) {
-        return transform(options, DownsampleStrategy.CENTER_INSIDE, new NineTransformationWrap(new CircleCrop()));
+        return transform(options, DownsampleStrategy.CENTER_INSIDE, new NinePngTransformationWrap(new CircleCrop()));
     }
 
 

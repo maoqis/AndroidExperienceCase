@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide.utils;
+package com.bumptech.glide.ninepng.utils;
 
 import android.util.Log;
 
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-class NineImageHeaderParser implements ImageHeaderParser {
+class NinePngImageHeaderParser implements ImageHeaderParser {
     private static final String TAG = "NineImageHeaderParser";
     public boolean is9png = false;
     DefaultImageHeaderParser defaultImageHeaderParser = new DefaultImageHeaderParser();

@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide.utils;
+package com.bumptech.glide.ninepng.utils;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.load.ImageHeaderParser;
 import com.bumptech.glide.load.ImageHeaderParserUtils;
 import com.bumptech.glide.load.engine.bitmap_recycle.ArrayPool;
-import com.maoqis.testcase.glide.io.ByteBufferReader;
-import com.maoqis.testcase.glide.io.IntReader;
+import com.bumptech.glide.ninepng.io.IntReader;
+import com.bumptech.glide.ninepng.io.ByteBufferReader;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,6 +25,7 @@ import java.nio.ByteOrder;
 import java.util.ArrayList;
 
 public class NinePngUtils {
+
     private static final String TAG = "NinePngUtils";
     /**
      * TODO: 需要计算9png 块(npTc)的数据。
@@ -66,22 +67,22 @@ public class NinePngUtils {
     }
 
     public static boolean is9png(@NonNull InputStream source, ArrayPool arrayPool) throws IOException {
-        NineImageHeaderParser nineImageHeaderParserWrap = new NineImageHeaderParser();
+        NinePngImageHeaderParser ninePngImageHeaderParserWrap = new NinePngImageHeaderParser();
         ArrayList<ImageHeaderParser> parsers = new ArrayList<>();
-        parsers.add(nineImageHeaderParserWrap);
+        parsers.add(ninePngImageHeaderParserWrap);
         ImageHeaderParserUtils.getType(parsers, source, arrayPool);
 
-        boolean is9png = nineImageHeaderParserWrap.is9png;
+        boolean is9png = ninePngImageHeaderParserWrap.is9png;
         return is9png;
     }
 
     public static boolean is9png(@NonNull ByteBuffer source) throws IOException {
-        NineImageHeaderParser nineImageHeaderParserWrap = new NineImageHeaderParser();
+        NinePngImageHeaderParser ninePngImageHeaderParserWrap = new NinePngImageHeaderParser();
         ArrayList<ImageHeaderParser> parsers = new ArrayList<>();
-        parsers.add(nineImageHeaderParserWrap);
+        parsers.add(ninePngImageHeaderParserWrap);
         ImageHeaderParserUtils.getType(parsers, source);
 
-        boolean is9png = nineImageHeaderParserWrap.is9png;
+        boolean is9png = ninePngImageHeaderParserWrap.is9png;
         return is9png;
     }
 

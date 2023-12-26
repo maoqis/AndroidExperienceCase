@@ -24,9 +24,9 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.maoqis.testcase.component.BaseCaseFragment;
-import com.maoqis.testcase.glide.GlideNinePngApi;
-import com.maoqis.testcase.glide.encoder.NineBitmapEncoder;
-import com.maoqis.testcase.glide.utils.NinePngUtils;
+import com.bumptech.glide.ninepng.NinePngGlideApi;
+import com.bumptech.glide.ninepng.encoder.NinePngBitmapEncoder;
+import com.bumptech.glide.ninepng.utils.NinePngUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -174,10 +174,10 @@ public class GlideNinePngFragment extends BaseCaseFragment {
         });
         findSetOnClickListener(R.id.tv_glide_custom_9png, v -> {
 
-            GlideNinePngApi.afterGlideInit(GlideApp.get(this.getActivity().getApplicationContext()));
+            NinePngGlideApi.afterGlideInit(GlideApp.get(this.getActivity().getApplicationContext()));
 
             /**
-             *需要去掉，{@link NineBitmapEncoder}
+             *需要去掉，{@link NinePngBitmapEncoder}
              */
 
             GlideApp.with(getActivity())
@@ -193,7 +193,7 @@ public class GlideNinePngFragment extends BaseCaseFragment {
             Log.d(TAG, "tv_glide_9png_cache: ");
             //set in application.onCreate
 
-            GlideNinePngApi.afterGlideInit(GlideApp.get(this.getActivity().getApplicationContext()));
+            NinePngGlideApi.afterGlideInit(GlideApp.get(this.getActivity().getApplicationContext()));
             /**
              * NineBitmapEncoder中直接返回了Source策略，保存的file不做转化。
              * 见：/data/user/0/com.maoqis.testcase/cache/image_manager_disk_cache23ae35c87a0847140a03006afa1a6d82840f64c371125bee1463e3f1840edd21.0
@@ -211,7 +211,7 @@ public class GlideNinePngFragment extends BaseCaseFragment {
         findSetOnClickListener(R.id.tv_glide_9png_skip_trans, v -> {
             Log.d(TAG, "tv_glide_9png_skip_trans: ");
 
-            GlideNinePngApi.afterGlideInit(GlideApp.get(this.getActivity().getApplicationContext()));
+            NinePngGlideApi.afterGlideInit(GlideApp.get(this.getActivity().getApplicationContext()));
             GlideApp.with(getActivity())
                     .asBitmap()
                     .load(urlChunk)
@@ -224,7 +224,7 @@ public class GlideNinePngFragment extends BaseCaseFragment {
         findSetOnClickListener(R.id.tv_glide_9png_drawable, v -> {
             Log.d(TAG, "tv_glide_9png_drawable: ");
 
-            GlideNinePngApi.afterGlideInit(GlideApp.get(this.getActivity().getApplicationContext()));
+            NinePngGlideApi.afterGlideInit(GlideApp.get(this.getActivity().getApplicationContext()));
             GlideApp.with(getActivity())
                     .load(urlChunk)
 //                    .asBitmap()//不用asBitmap。

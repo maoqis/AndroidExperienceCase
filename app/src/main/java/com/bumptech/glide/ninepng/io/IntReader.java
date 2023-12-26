@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide.io;
+package com.bumptech.glide.ninepng.io;
 
 import java.io.DataInputStream;
 import java.io.EOFException;

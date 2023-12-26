@@ -1,4 +1,4 @@
-package com.maoqis.testcase.glide.decoder;
+package com.bumptech.glide.ninepng.decoder;
 
 
 import android.graphics.Bitmap;
@@ -13,8 +13,8 @@ import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 import com.bumptech.glide.util.ByteBufferUtil;
-import com.maoqis.testcase.glide.utils.Constants;
-import com.maoqis.testcase.glide.utils.NinePngUtils;
+import com.bumptech.glide.ninepng.utils.Constants;
+import com.bumptech.glide.ninepng.utils.NinePngUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
