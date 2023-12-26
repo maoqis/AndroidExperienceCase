@@ -9,6 +9,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <com.maoqis.testcase.view.CommonClickView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Glide.with(x).load(x).into(ImageView) 3部曲的优点是什么？with的管理生命周期管理；into ImageView的便捷性，断网重连再加载是如何配置的，是否需要into ImageView？；load的活动缓存、内容缓存、磁盘缓存的管理。" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -106,7 +112,7 @@
             android:id="@+id/tv_glide_9png_drawable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="9. 不用手动设置asBitmap方法：支持asDrawable。源码对于drawable，在解码后 和 编码前 有个BitmapDrawable转换，跳过它，避免都是块信息。另外编码器需要支持NinePatchDrawable（NineDrawableEncoder），避免由BitmapDrawable编码器保存了中间文件->">
+            android:text="10. 不用手动设置asBitmap方法：支持asDrawable。源码对于drawable，在解码后 和 编码前 有个BitmapDrawable转换，跳过它，避免丢失块信息。另外编码器需要支持NinePatchDrawable（NineDrawableEncoder），避免由BitmapDrawable编码器保存了中间文件->">
 
         </com.maoqis.testcase.view.CommonClickView>
 
