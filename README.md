@@ -9,7 +9,7 @@
 15:12:54.474  E  FATAL EXCEPTION: abc
                  Process: com.maoqis.testcase, PID: 4622
                  java.lang.ArithmeticException: divide by zero
-                 	at com.maoqis.testcase.RxZipErrorFragment$1.run(RxZipErrorFragment.java:51)
+                 	at com.maoqis.testcase.feature.RxZipErrorFragment$1.run(RxZipErrorFragment.java:51)
 15:12:54.485  D  checkEventAndDumpForJE: 0
 15:12:54.661  I  Sending signal. PID: 4622 SIG: 9
 ---------------------------- PROCESS ENDED (4622) for package com.maoqis.testcase ----------------------------
@@ -49,7 +49,7 @@ Tip： zip中每一项都需要单独处理 异常。
 15:13:49.111  W  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
 15:13:49.111  W  	at java.lang.Thread.run(Thread.java:764)
 15:13:49.112  W  Caused by: java.lang.Exception: second exception
-15:13:49.112  W  	at com.maoqis.testcase.RxZipErrorFragment.lambda$null$2(RxZipErrorFragment.java:64)
+15:13:49.112  W  	at com.maoqis.testcase.feature.RxZipErrorFragment.lambda$null$2(RxZipErrorFragment.java:64)
 15:13:49.112  W  	at com.maoqis.testcase.-$$Lambda$RxZipErrorFragment$d0gZw506znokShgrSfoRIiWhEH8.subscribe(Unknown Source:0)
 15:13:49.113  W  	at io.reactivex.rxjava3.internal.operators.observable.ObservableCreate.subscribeActual(ObservableCreate.java:40)
 15:13:49.113  W  	... 10 more
@@ -83,7 +83,7 @@ Tip： zip中每一项都需要单独处理 异常。
                  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
                  	at java.lang.Thread.run(Thread.java:764)
                  Caused by: java.lang.Exception: second exception
-                 	at com.maoqis.testcase.RxZipErrorFragment.lambda$null$22(RxZipErrorFragment.java:161)
+                 	at com.maoqis.testcase.feature.RxZipErrorFragment.lambda$null$22(RxZipErrorFragment.java:161)
                  	at com.maoqis.testcase.-$$Lambda$RxZipErrorFragment$27RZ5dbhKZ2Mx85W5oZRzvVRTCo.subscribe(Unknown Source:0)
                  	at io.reactivex.rxjava3.internal.operators.observable.ObservableCreate.subscribeActual(ObservableCreate.java:40)
                  	at io.reactivex.rxjava3.core.Observable.subscribe(Observable.java:13102) 

@@ -1,4 +1,4 @@
-package com.maoqis.testcase;
+package com.maoqis.testcase.feature;
 
 import static android.os.Environment.DIRECTORY_PICTURES;
 
@@ -13,7 +13,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.util.Log;
-import android.view.ViewGroup;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -23,10 +23,12 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Registry;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.maoqis.testcase.R;
 import com.maoqis.testcase.component.BaseCaseFragment;
 import com.bumptech.glide.ninepng.NinePngGlideApi;
 import com.bumptech.glide.ninepng.encoder.NinePngBitmapEncoder;
 import com.bumptech.glide.ninepng.utils.NinePngUtils;
+import com.maoqis.testcase.glide.GlideApp;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,7 +45,7 @@ public class GlideNinePngFragment extends BaseCaseFragment {
 
     @SuppressLint("CheckResult")
     @Override
-    protected void onInitView(ViewGroup rootView) {
+    protected void onInitView(View rootView) {
 
 
         ImageView ivH48 = rootView.findViewById(R.id.iv_h48);

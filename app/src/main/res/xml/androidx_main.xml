@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        app:fragment="com.maoqis.testcase.feature.RxZipErrorFragment"
+        app:title="RxZipErrorFragment ->" />
+    <Preference
+        app:fragment="com.maoqis.testcase.feature.StartActivityFragment"
+        app:title="StartActivityFragment ->" />
+
+    <Preference
+        app:fragment="com.maoqis.testcase.feature.GlideNinePngFragment"
+        app:title="Glide9pngFragment ->" />
+</PreferenceScreen>

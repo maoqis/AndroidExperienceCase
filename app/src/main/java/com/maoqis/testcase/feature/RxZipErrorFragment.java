@@ -1,16 +1,12 @@
-package com.maoqis.testcase;
+package com.maoqis.testcase.feature;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Fragment;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+
+
+import com.maoqis.testcase.R;
+import com.maoqis.testcase.component.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +15,10 @@ import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class RxZipErrorFragment extends Fragment {
+public class RxZipErrorFragment extends BaseFragment {
     private static final String TAG = "RxZipErrorFragment";
 
     public void onCreate(Bundle savedInstanceState) {
@@ -31,15 +26,14 @@ public class RxZipErrorFragment extends Fragment {
 
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_rx_zip_error_test, container, false);
+    protected int getRLayout() {
+        return R.layout.activity_rx_zip_error_test;
     }
 
+
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void onInitView(View view) {
         view.findViewById(R.id.tv_on_error_again).setOnClickListener(v -> {
             Observable.just(1).subscribeOn(Schedulers.io()).map(t -> {
                 throw new Exception("test, map throw a Exception");

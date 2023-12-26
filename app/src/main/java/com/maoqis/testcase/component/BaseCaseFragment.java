@@ -15,15 +15,20 @@ public abstract class BaseCaseFragment extends BaseFragment {
     }
 
     protected CommonClickView addCommonTextView(String name, View.OnClickListener onClickListener) {
-       return addCommonTextView(rootView, name, onClickListener);
+        return addCommonTextView(rootView, name, onClickListener);
     }
 
-    public static CommonClickView addCommonTextView(ViewGroup rootView, String name, View.OnClickListener onClickListener) {
-        CommonClickView child = new CommonClickView(rootView.getContext(), null);
-        child.setOnClickListener(onClickListener);
-        child.setText(name);
-        rootView.addView(child);
-        return child;
+    public static CommonClickView addCommonTextView(View rootView, String name, View.OnClickListener onClickListener) {
+        if (rootView instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) rootView;
+            CommonClickView child = new CommonClickView(rootView.getContext(), null);
+            child.setOnClickListener(onClickListener);
+            child.setText(name);
+            viewGroup.addView(child);
+            return child;
+        } else {
+            return null;
+        }
     }
 
     protected View findSetOnClickListener(@IdRes int id, View.OnClickListener l) {

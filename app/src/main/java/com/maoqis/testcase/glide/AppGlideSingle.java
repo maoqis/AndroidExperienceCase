@@ -1,4 +1,4 @@
-package com.maoqis.testcase;
+package com.maoqis.testcase.glide;
 
 import android.content.Context;
 import android.util.Log;

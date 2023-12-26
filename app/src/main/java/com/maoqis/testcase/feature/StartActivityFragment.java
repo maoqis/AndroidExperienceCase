@@ -1,29 +1,25 @@
-package com.maoqis.testcase;
+package com.maoqis.testcase.feature;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+import com.maoqis.testcase.R;
+import com.maoqis.testcase.component.BaseFragment;
 
-public class StartActivityFragment extends Fragment {
+public class StartActivityFragment extends BaseFragment {
     private static final String TAG = "StartActivityFragment";
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_start_activity, container, false);
+    protected int getRLayout() {
+        return R.layout.activity_start_activity;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.tv_must_result).setOnClickListener( v -> {
+    protected void onInitView(View rootView) {
+        rootView.findViewById(R.id.tv_must_result).setOnClickListener( v -> {
             Log.d(TAG, "tv_must_result startActivityForResult: mv://Main");
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("mv://Main"));

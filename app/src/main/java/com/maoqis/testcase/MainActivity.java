@@ -5,17 +5,29 @@ import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
-import java.util.List;
 
-public class MainActivity extends PreferenceActivity {
+public class MainActivity extends AppCompatActivity implements
+        PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        this.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fl_content, new DemoPreferenceFragment())
+                .commit();
         checkPermissionAndLoadImg();
     }
 
@@ -31,23 +43,23 @@ public class MainActivity extends PreferenceActivity {
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 101);
         }
     }
-
+    
 
     @Override
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public void onBuildHeaders(List<Header> target) {
-        //加载选项列表布局
-        loadHeadersFromResource(R.xml.main, target);
-    }
-
-    /**
-     * 验证Preference是否有效
-     *
-     * @param fragmentName
-     * @return
-     */
-    protected boolean isValidFragment(String fragmentName) {
+    public boolean onPreferenceStartFragment(@NonNull PreferenceFragmentCompat caller, @NonNull Preference pref) {
+        Log.d(TAG, "onPreferenceStartFragment() called with: caller = [" + caller + "], pref = [" + pref + "]");
+        // Instantiate the new Fragment
+        final Bundle args = pref.getExtras();
+        final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(
+                getClassLoader(),
+                pref.getFragment());
+        fragment.setArguments(args);
+        fragment.setTargetFragment(caller, 0);
+        // Replace the existing Fragment with the new Fragment
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fl_content, fragment)
+                .addToBackStack(null)
+                .commit();
         return true;
     }
-
 }
