@@ -65,7 +65,7 @@ public class NinePngUtils {
         return false;
     }
 
-    public static boolean isIs9png(@NonNull InputStream source, ArrayPool arrayPool) throws IOException {
+    public static boolean is9png(@NonNull InputStream source, ArrayPool arrayPool) throws IOException {
         NineImageHeaderParser nineImageHeaderParserWrap = new NineImageHeaderParser();
         ArrayList<ImageHeaderParser> parsers = new ArrayList<>();
         parsers.add(nineImageHeaderParserWrap);

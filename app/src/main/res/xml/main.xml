@@ -10,6 +10,6 @@
         android:title="StartActivityFragment ->" />
 
     <header
-        android:fragment="com.maoqis.testcase.Glide9pngFragment"
+        android:fragment="com.maoqis.testcase.GlideNinePngFragment"
         android:title="Glide9pngFragment ->" />
 </preference-headers>

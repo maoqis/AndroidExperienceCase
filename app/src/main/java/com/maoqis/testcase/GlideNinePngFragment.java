@@ -33,7 +33,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Glide9pngFragment extends BaseCaseFragment {
+public class GlideNinePngFragment extends BaseCaseFragment {
     private static final String TAG = "Glide9pngFragment";
 
     @Override
@@ -216,6 +216,18 @@ public class Glide9pngFragment extends BaseCaseFragment {
                     .asBitmap()
                     .load(urlChunk)
 //                    .dontTransform()// 使用NinePngGlideExtension 拦截了optionalCenterCrop。
+                    .diskCacheStrategy(ALL)
+                    .into(ivAPPT);
+
+        });
+        //10
+        findSetOnClickListener(R.id.tv_glide_9png_drawable, v -> {
+            Log.d(TAG, "tv_glide_9png_drawable: ");
+
+            GlideNinePngApi.afterGlideInit(GlideApp.get(this.getActivity().getApplicationContext()));
+            GlideApp.with(getActivity())
+                    .load(urlChunk)
+//                    .asBitmap()//不用asBitmap。
                     .diskCacheStrategy(ALL)
                     .into(ivAPPT);
 

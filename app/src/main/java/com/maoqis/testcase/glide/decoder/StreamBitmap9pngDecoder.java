@@ -38,7 +38,7 @@ public class StreamBitmap9pngDecoder implements ResourceDecoder<InputStream, Bit
     @Override
     public boolean handles(@NonNull InputStream source, @NonNull Options options) throws IOException {
         Log.d(TAG, "handles: ");
-        boolean is9png = NinePngUtils.isIs9png(source, arrayPool);
+        boolean is9png = NinePngUtils.is9png(source, arrayPool);
         Log.d(TAG, "handles: is9png=" + is9png);
         options.set(Constants.IS_9PNG, is9png);
 

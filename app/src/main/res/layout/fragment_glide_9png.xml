@@ -103,6 +103,14 @@
         </com.maoqis.testcase.view.CommonClickView>
 
         <com.maoqis.testcase.view.CommonClickView
+            android:id="@+id/tv_glide_9png_drawable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="9. 不用手动设置asBitmap方法：支持asDrawable。源码对于drawable，在解码后 和 编码前 有个BitmapDrawable转换，跳过它，避免都是块信息。另外编码器需要支持NinePatchDrawable（NineDrawableEncoder），避免由BitmapDrawable编码器保存了中间文件->">
+
+        </com.maoqis.testcase.view.CommonClickView>
+
+        <com.maoqis.testcase.view.CommonClickView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="到这已经不用单独配置Glide load调用处，来适配9png图片加载了。有哪个卡片需要适配圆角，那直接用编译后的9png就可以。\n
