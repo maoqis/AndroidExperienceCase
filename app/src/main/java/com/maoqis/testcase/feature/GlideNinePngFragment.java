@@ -25,9 +25,9 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.maoqis.testcase.R;
 import com.maoqis.testcase.component.BaseCaseFragment;
-import com.bumptech.glide.ninepng.NinePngGlideApi;
-import com.bumptech.glide.ninepng.encoder.NinePngBitmapEncoder;
-import com.bumptech.glide.ninepng.utils.NinePngUtils;
+import com.github.maoqis.glide9png.NinePngGlideApi;
+import com.github.maoqis.glide9png.encoder.NinePngBitmapEncoder;
+import com.github.maoqis.glide9png.utils.NinePngUtils;
 import com.maoqis.testcase.glide.GlideApp;
 
 import java.io.File;
