@@ -52,12 +52,8 @@ public class GlideNinePngFragment extends BaseCaseFragment {
         ImageView ivAPPT = rootView.findViewById(R.id.iv_appt);
 
         //直接显示原9.png 有黑边，缺少Bitmap中的9.png 的chunk信息。
-        String url = "https://i.postimg.cc/cZTH0ZJR/ninepatch-bubble-9.png?dl=1";
-//        String url = "https://raw.githubusercontent.com/vindolin/ninepatch/master/src/ninepatch/data/ninepatch_bubble.9.png";
-//        github文件国内访问不了
-//        String urlChunk = "https://raw.githubusercontent.com/maoqis/AndroidExperienceCase/master/app/src/main/assets/ninepatch_bubble_chunk.9.png";
-//        https://www.ffsup.com/ 图片30天过期，自己上传吧：https://f0.0sm.com/node0/2023/12/86587D8BBFF8072C-dd1df953adff45e2.png
-        String urlChunk = "https://f0.0sm.com/node0/2023/12/86587D8BBFF8072C-dd1df953adff45e2.png";
+        String url = "https://www.xijnp.com:8888/down/0jBZcbLr8X7h.png";
+        String urlChunk = "https://www.xijnp.com:8888/down/TYe2aqTbwIBj.png";
         File fileChuck = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_PICTURES), "ninepatch_bubble_chunk.9.png");
 
 
