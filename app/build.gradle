@@ -29,6 +29,8 @@ android {
 }
 
 dependencies {
+
+//    implementation(project(':Glide9Png:glide9png'))
     implementation 'io.github.maoqis:glide9png:0.0.2.4.16.0-SNAPSHOT'
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     // Because RxAndroid releases are few and far between, it is recommended you also
