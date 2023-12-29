@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.maoqis.testcase.R;
-import com.maoqis.testcase.component.BaseFragment;
+import com.github.maoqis.base.component.BaseFragment;
 
 public class StartActivityFragment extends BaseFragment {
     private static final String TAG = "StartActivityFragment";

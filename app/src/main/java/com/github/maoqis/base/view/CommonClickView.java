@@ -1,4 +1,4 @@
-package com.maoqis.testcase.view;
+package com.github.maoqis.base.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -1,4 +1,4 @@
-package com.maoqis.testcase.component;
+package com.github.maoqis.base.component;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.IdRes;
 
 import com.maoqis.testcase.R;
-import com.maoqis.testcase.view.CommonClickView;
+import com.github.maoqis.base.view.CommonClickView;
 
 public abstract class BaseCaseFragment extends BaseFragment {
 

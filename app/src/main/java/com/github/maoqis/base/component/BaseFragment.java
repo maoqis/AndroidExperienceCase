@@ -1,4 +1,4 @@
-package com.maoqis.testcase.component;
+package com.github.maoqis.base.component;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

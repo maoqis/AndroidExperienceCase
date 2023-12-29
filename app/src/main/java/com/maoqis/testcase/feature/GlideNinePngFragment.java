@@ -24,7 +24,7 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.maoqis.testcase.R;
-import com.maoqis.testcase.component.BaseCaseFragment;
+import com.github.maoqis.base.component.BaseCaseFragment;
 import com.github.maoqis.glide9png.NinePngGlideApi;
 import com.github.maoqis.glide9png.encoder.NinePngBitmapEncoder;
 import com.github.maoqis.glide9png.utils.NinePngUtils;
