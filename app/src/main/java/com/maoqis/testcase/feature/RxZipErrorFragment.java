@@ -6,7 +6,7 @@ import android.view.View;
 
 
 import com.maoqis.testcase.R;
-import com.github.maoqis.base.component.BaseFragment;
+import com.github.maoqis.android.base.component.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;

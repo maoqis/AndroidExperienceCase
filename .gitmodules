@@ -1,3 +1,6 @@
 [submodule "Glide9Png"]
 	path = Glide9Png
 	url = https://github.com/maoqis/Glide9Png.git
+[submodule "AndroidBaseLib"]
+	path = AndroidBaseLib
+	url = https://github.com/maoqis/AndroidBaseLib.git

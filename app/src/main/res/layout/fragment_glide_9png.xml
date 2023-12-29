@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.github.maoqis.base.view.CommonClickView
+        <com.github.maoqis.android.base.view.CommonClickView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
@@ -27,7 +27,7 @@
             android:scaleType="fitXY"
             android:background="@drawable/ninepatch_bubble"></ImageView>
 
-        <com.github.maoqis.base.view.CommonClickView
+        <com.github.maoqis.android.base.view.CommonClickView
             android:id="@+id/tv_source_not_appt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,22 +42,22 @@
 
         </ImageView>
 
-        <com.github.maoqis.base.view.CommonClickView
+        <com.github.maoqis.android.base.view.CommonClickView
             android:id="@+id/tv_not_appt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="3. 发现原因：not appt ：使用assets目录读取原文件（appt前）ninepatch_bubble.9.png流和读文件是一样的。点击->">
 
-        </com.github.maoqis.base.view.CommonClickView>
+        </com.github.maoqis.android.base.view.CommonClickView>
 
-        <com.github.maoqis.base.view.CommonClickView
+        <com.github.maoqis.android.base.view.CommonClickView
             android:id="@+id/tv_appt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="4. 使用appt后文件ninepatch_bubble_chunk.9.png，加载成功 。`aapt s -i [文件名] -o [文件名]` 点击对比->"
             android:textColor="@color/purple_500">
 
-        </com.github.maoqis.base.view.CommonClickView>
+        </com.github.maoqis.android.base.view.CommonClickView>
 
 
         <ImageView
@@ -68,13 +68,13 @@
 
         </ImageView>
 
-        <com.github.maoqis.base.view.CommonClickView
+        <com.github.maoqis.android.base.view.CommonClickView
             android:id="@+id/tv_glide_appt_only_download"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="5. glide onlyDownload ok。into 返回file资源 点击-> 。" />
 
-        <com.github.maoqis.base.view.CommonClickView
+        <com.github.maoqis.android.base.view.CommonClickView
             android:id="@+id/tv_glide_decoder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,41 +83,41 @@
             \n 另外需要自定义编码器NineBitmapEncoder返回Source，以保证缓存文件为原数据流，而非经Bitmap转换的temp文件）点击->"
             android:textColor="@android:color/holo_red_dark">
 
-        </com.github.maoqis.base.view.CommonClickView>
+        </com.github.maoqis.android.base.view.CommonClickView>
 
-        <com.github.maoqis.base.view.CommonClickView
+        <com.github.maoqis.android.base.view.CommonClickView
             android:id="@+id/tv_glide_custom_9png"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="7. 不用手动将Bitmap转成NinePatchDrawable：自定义ImageViewTargetFactory。 点击->">
 
-        </com.github.maoqis.base.view.CommonClickView>
+        </com.github.maoqis.android.base.view.CommonClickView>
 
-        <com.github.maoqis.base.view.CommonClickView
+        <com.github.maoqis.android.base.view.CommonClickView
             android:id="@+id/tv_glide_9png_cache"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="8. 可以使用缓存： 修改加码器NineBitmapEncoder 返回 Source。点击->">
 
-        </com.github.maoqis.base.view.CommonClickView>
+        </com.github.maoqis.android.base.view.CommonClickView>
 
-        <com.github.maoqis.base.view.CommonClickView
+        <com.github.maoqis.android.base.view.CommonClickView
             android:id="@+id/tv_glide_9png_skip_trans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="9. 不用手动设置dontTransform方法：使用NinePngGlideExtension 跳过into 方法中设置的Transform。点击->">
 
-        </com.github.maoqis.base.view.CommonClickView>
+        </com.github.maoqis.android.base.view.CommonClickView>
 
-        <com.github.maoqis.base.view.CommonClickView
+        <com.github.maoqis.android.base.view.CommonClickView
             android:id="@+id/tv_glide_9png_drawable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="10. 不用手动设置asBitmap方法：支持asDrawable。源码对于drawable，在解码后 和 编码前 有个BitmapDrawable转换，跳过它，避免丢失块信息。另外编码器需要支持NinePatchDrawable（NineDrawableEncoder），避免由BitmapDrawable编码器保存了中间文件->">
 
-        </com.github.maoqis.base.view.CommonClickView>
+        </com.github.maoqis.android.base.view.CommonClickView>
 
-        <com.github.maoqis.base.view.CommonClickView
+        <com.github.maoqis.android.base.view.CommonClickView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="到这已经不用单独配置Glide load调用处，来适配9png图片加载了。有哪个卡片需要适配圆角，那直接用编译后的9png就可以。\n
@@ -128,7 +128,7 @@
 
             android:textColor="@color/purple_500">
 
-        </com.github.maoqis.base.view.CommonClickView>
+        </com.github.maoqis.android.base.view.CommonClickView>
 
 
     </LinearLayout>
