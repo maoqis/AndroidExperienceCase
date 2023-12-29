@@ -24,9 +24,12 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DemoPreferenceFragment fragment = new DemoPreferenceFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
         this.getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fl_content, new DemoPreferenceFragment())
+                .replace(R.id.fl_content, fragment)
                 .commit();
         checkPermissionAndLoadImg();
     }

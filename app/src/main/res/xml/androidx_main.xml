@@ -11,6 +11,6 @@
         app:title="StartActivityFragment ->" />
 
     <Preference
-        app:fragment="com.maoqis.testcase.feature.GlideNinePngFragment"
+        app:fragment="com.github.maoqis.glide9png.demo.GlideNinePngFragment"
         app:title="Glide9pngFragment ->" />
 </PreferenceScreen>

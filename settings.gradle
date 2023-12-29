@@ -1,4 +1,5 @@
 include ':app'
 rootProject.name = "AndroidExperienceCase"
 include ':Glide9Png:glide9png'
+include ':Glide9Png:demo'
 include ':AndroidBaseLib:base'
