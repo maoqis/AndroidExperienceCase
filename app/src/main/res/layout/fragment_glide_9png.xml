@@ -22,9 +22,10 @@
             android:text="1. 加载res文件中9.png，打包时候已经经过aapt编译：通过是否有边线，来判断是否是9.png。" />
 
         <ImageView
-            android:layout_width="360dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ninepatch_bubble"></ImageView>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:background="@drawable/ninepatch_bubble"></ImageView>
 
         <com.maoqis.testcase.view.CommonClickView
             android:id="@+id/tv_source_not_appt"
@@ -36,8 +37,8 @@
 
         <ImageView
             android:id="@+id/iv_h48"
-            android:layout_width="360dp"
-            android:layout_height="48dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         </ImageView>
 
@@ -61,8 +62,8 @@
 
         <ImageView
             android:id="@+id/iv_appt"
-            android:layout_width="360dp"
-            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:scaleType="fitXY">
 
         </ImageView>
