@@ -2,8 +2,16 @@
 
 # Case for android experience
 
-## 系统杀进程 in RxZipErrorFragment
+## 一、功能简介
+### git submodule
+1. clone 仓库后，需要再更新子仓库
+```
+git submodule update
+```
 
+
+## 二、 RxZipErrorFragment
+rx相关异常出来经验。配置不好，会导致有未捕获的crash。
 ### 子线程异常FATAL EXCEPTION，app进程发出信号9(有时候没日志)，后续系统杀进程
 ```
 15:12:54.474  E  FATAL EXCEPTION: abc
@@ -98,3 +106,9 @@ Tip： zip中每一项都需要单独处理 异常。
                  	at java.lang.Thread.run(Thread.java:764)
 
 ```
+
+## 三、启动模式
+
+## 四、Glide加载9.png
+
+## 五、模块化，git push maven
