@@ -1,4 +1,4 @@
-
+[TOC]
 
 # Case for android experience
 
@@ -108,7 +108,38 @@ Tip： zip中每一项都需要单独处理 异常。
 ```
 
 ## 三、启动模式
+### 3.1 
 
 ## 四、Glide加载9.png
+[github Glide9Png](https://github.com/maoqis/Glide9Png)
+
 
 ## 五、模块化，git push maven
+
+### 5.1 发布的子module的gradle文件中引入release-bintray.gradle
+
+```
+apply from: "./../release-bintray.gradle"
+```
+
+### 5.2 主发布文件
+https://github.com/maoqis/Glide9Png/blob/main/release-bintray.gradle
+
+### 5.3 local.properties 中配置秘密相关
+```
+//配置from local.properties
+ext["signing.keyId"] = ''
+ext["signing.password"] = ''
+ext["signing.secretKeyRingFile"] = ''
+ext["ossrhUsername"] = ''
+ext["ossrhPassword"] = '' //
+```
+### 5.4 project gradle.properties 配置版本号、组织名
+
+```
+//配置from project gradle
+version = VERSION_NAME
+
+//配置from gradle.properties
+group = GROUP
+```
