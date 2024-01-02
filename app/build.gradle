@@ -31,8 +31,16 @@ android {
 dependencies {
     implementation project(':AndroidBaseLib:base')
     implementation project(':Glide9Png:demo')
-    print("useLocalModule in app=" + useLocalModule)
-    implementation useLocalModule ? project(':Glide9Png:glide9png') : 'io.github.maoqis:glide9png:1.0.0.4.16.0'
+
+
+    if (useLocalModule as boolean) {
+        print("app implementation :Glide9Png:glide9png useLocalModule=" + useLocalModule)
+        implementation project(':Glide9Png:glide9png')
+    } else {
+        print("app implementation io.github.maoqis:glide9png useLocalModule=" + useLocalModule)
+        implementation 'io.github.maoqis:glide9png:1.0.0.4.16.0'
+
+    }
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava's latest version for bug fixes and new features.
