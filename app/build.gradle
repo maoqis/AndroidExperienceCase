@@ -29,17 +29,22 @@ android {
 }
 
 dependencies {
-    implementation project(':AndroidBaseLib:base')
-    implementation project(':Glide9Png:demo')
 
 
-    if (useMavenStr as boolean) {
-        print("app implementation :Glide9Png:glide9png useMavenStr=" + useMavenStr)
-        implementation project(':Glide9Png:glide9png')
-    } else {
-        print("app implementation io.github.maoqis:glide9png useMavenStr=" + useMavenStr)
-        implementation 'io.github.maoqis:glide9png:1.0.0.4.16.0'
-    }
+    //demo里面也是通过 useMavenStr，引入下面2库。useMavenStr优先使用的编译时候的project中变量值。
+//    if (useMavenStr == "true") {
+//        print("app implementation io.github.maoqis:glide9png useMavenStr=" + useMavenStr)
+//        implementation 'io.github.maoqis:glide9png:1.0.0.4.16.0'
+//        implementation 'io.github.maoqis:androidbase:0.0.1-SNAPSHOT'
+//
+//    } else {
+//
+//        print("app implementation :Glide9Png:glide9png useMavenStr=" + useMavenStr)
+//        implementation project(':Glide9Png:glide9pnglib')
+//        implementation project(':AndroidBaseLib:base')
+//    }
+
+    api project(':Glide9Png:demo')
 
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     // Because RxAndroid releases are few and far between, it is recommended you also
