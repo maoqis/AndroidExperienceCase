@@ -1,5 +1,6 @@
 include ':app'
 rootProject.name = "AndroidExperienceCase"
-include ':Glide9Png:glide9pnglib'
+
+include ':Glide9Png:glide9pnglib'//为了给demo中使用，因为如果在该工程中编译
 include ':Glide9Png:demo'
 include ':AndroidBaseLib:base'
