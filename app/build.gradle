@@ -30,7 +30,11 @@ android {
 
 dependencies {
 
-    implementation project(':Glide9Png:demo')
+
+
+    api project(':Glide9Png:demo')
+
+//    implementation 'io.github.maoqis:glide9png:1.0.1.4.16.0'     //如果 useMavenStr=false，需要注释了，因为唯一标识不一样，demo直接引入了module，测试会报错引入重复class。后续考虑用本地仓库。
 
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     // Because RxAndroid releases are few and far between, it is recommended you also
