@@ -5,9 +5,12 @@ buildscript {
         mavenCentral()
         maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
 //        maven { url 'https://s01.oss.sonatype.org/content/repositories/staging/' }
-
-
         google()
+
+        println("main 默认使用 mavenLocal")
+        mavenLocal()
+
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.1.3'
@@ -24,6 +27,10 @@ allprojects {
         maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
 //        maven { url 'https://s01.oss.sonatype.org/content/repositories/staging/' }
         google()
+
+        mavenLocal()
+        println("main 默认使用 mavenLocal")
+
     }
 }
 
