@@ -2,7 +2,9 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <Preference
+        app:fragment="com.maoqis.testcase.feature.RecreateActivityFragment"
+        app:title="RecreateActivityFragment ->" />
     <Preference
         app:fragment="com.maoqis.testcase.feature.RxZipErrorFragment"
         app:title="RxZipErrorFragment ->" />

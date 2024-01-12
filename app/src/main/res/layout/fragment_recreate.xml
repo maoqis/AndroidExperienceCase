@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.github.maoqis.android.base.view.CommonClickView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:text="LiveData 可以实现配置变化时候 ActivityClientRecord生命周期内的恢复 " />
+
+    <com.github.maoqis.android.base.view.CommonClickView
+        android:id="@+id/tb_livedata_register_activity"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:text="1. 注册，使用Activity 的ViewModelStore ，可以恢复observe时候收到上次消息 ->" />
+
+    <com.github.maoqis.android.base.view.CommonClickView
+        android:id="@+id/tb_livedata_post_activity"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:text="post发送 数据到 Activity的ViewModelStore 对应的LiveData中，post 数据使用ActivityId ->" />
+
+
+    <com.github.maoqis.android.base.view.CommonClickView
+        android:id="@+id/tb_livedata_register_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:text="2. 注册，使用Fragment 的ViewModelStore ，这块需要看源码，暂时不能不能恢复->" />
+
+    <com.github.maoqis.android.base.view.CommonClickView
+        android:id="@+id/tb_livedata_post_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:text="post发送 数据到 Fragment的ViewModelStore 对应的LiveData中，post 数据使用ActivityId ->" />
+
+    <com.github.maoqis.android.base.view.CommonClickView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="总结：虽然每次深色模式重建时候，activity hashcode值变化。 但是，有个Activity的ViewModelStore() 在onDestory时候 ，缓存ViewModelStore到了NonConfigurationInstances中，NonConfigurationInstances又是缓存到ActivityClientRecord.lastNonConfigurationInstances中。
+        如果LiveData中有上次数据 ，observe时候会立马调用" />
+
+    <com.github.maoqis.android.base.view.CommonClickView
+        android:id="@+id/tb_vm_savedstatehandle_register"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:text="3. ViewModel 参数SavedStateHandle 使用, register ->" />
+
+    <com.github.maoqis.android.base.view.CommonClickView
+        android:id="@+id/tb_vm_savedstatehandle_post"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:text="ViewModel 参数SavedStateHandle 使用, post。这个SavedStateHandle只是额外存储功能，还是取决于 ViewModelStore引用 ->" />
+
+
+</LinearLayout>

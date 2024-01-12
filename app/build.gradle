@@ -31,8 +31,11 @@ android {
 dependencies {
 
 
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
-    api project(':Glide9Png:demo')
+    api project(':Glide9Png:demo')//androidbase  0.0.1
+//    implementation 'io.github.maoqis:androidbase:0.0.2-SNAPSHOT'
 
 //    implementation 'io.github.maoqis:glide9png:1.0.1.4.16.0'     //如果 useMavenStr=false，需要注释了，因为唯一标识不一样，demo直接引入了module，测试会报错引入重复class。后续考虑用本地仓库。
 
